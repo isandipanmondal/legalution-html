@@ -178,17 +178,22 @@
 <br><br>	
 	<div class="form-group form-check">
     <label class="form-check-label">
-    <input class="form-check-input input_position" type="checkbox"><h4 style="color: #f52f08">Urgent Work</h4>
-	</label>
+      <input class="form-check-input input_position" type="checkbox"><h4 style="color: #f52f08">Urgent Work</h4>
+	  </label>
     </div>	
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="hide-content" style="display: none;">
+        <h5><b>Status-</b>  &nbsp;Pending for Payment<br> <b>Amount-</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;299/-<br><b> Total Amount- </b>&nbsp;&nbsp;&nbsp;353/-</h5>
+      </div>
+    </div>
+
+    <br>  
  
  	<div class=""><button class="btn1 btn_width"><a href="rti_form3.html">Pay Now</a></button></div>
  </div>
 </div>
 </div>
-
-
-		
 
 
 <br><br>
@@ -264,6 +269,14 @@
     </div>
 </div>
 </div>
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+    $(".input_position").click(function(event) {
+      $(".hide-content").fadeToggle();
+    });
+  });
+</script>
 
 <script>
 var acc = document.getElementsByClassName("accordion");
