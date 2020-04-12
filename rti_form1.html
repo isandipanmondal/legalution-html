@@ -180,7 +180,7 @@
 		<div class="col-md-6 col-sm-12 col-12 pad_bottom">
       <div class="file_complaints">
 			<h3>Online RTI Application form India Apply Now</h3><br>Submit Your Details Here<br>
-				<form action="/action_page.php" class="needs-validation" novalidate>
+				<form action="rti_form2.html" class="needs-validation" id="rti_form1">
 			    <div class="form-group">
 			      <label for="name"><b>Applicant Name</b></label>
 			      <input type="text" class="form-control" id="name" name="name" required>
@@ -263,7 +263,7 @@
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			  <br>
-			  <div class="text-center"><button class="btn1 btn_width"><a href="rti_form2.html">Next</a></button></div>
+			  <div class="text-center"><button class="btn1 btn_width" type="submit">Next</button></div>
 			  </form>
       </div>
    </div> 
@@ -382,5 +382,9 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js?ss"></script>
+<!--end :: development-->
 </body>
 </html>
