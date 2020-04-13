@@ -605,6 +605,7 @@ function payment_gateway_return($data){
         default:
             $payment_return_url="index.html";
     }
+    $payment_return_url = "succes.html";
     $payment_return_url .=$params;
     
     header("Location:$payment_return_url");
