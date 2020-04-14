@@ -1,10 +1,10 @@
 <?php
 
-define('recieverEmail',"i.sandipanmondal@gmail.com");
+define('recieverEmail',"legalution.in@gmail.com");
 define('printLog',false);
 //get mail headers 
 function mail_headers(){
-    $headers = "Bcc: mrintoryal@gmail.com";
+    $headers = "Bcc: saninfowb@gmail.com";
     return $headers;
 }
 
