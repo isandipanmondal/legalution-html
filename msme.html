@@ -210,7 +210,7 @@
 	<div class="col-md-6 col-sm-12 col-12 pad_bottom">
     <div class="file_complaints">
 		<h3>Udyog Aadhaar Registration Form</h3><p>Get Your Bussiness Registred Under Govt. of India</p>
-		<form action="/action_page.php" class="needs-validation" novalidate>
+		<form action="" class="needs-validation" id="uar_form">
 			    <div class="form-group">
 			      <label for="name"><b>1. Name of Entrepreneur/Applicant</b></label>
 			      <input type="text" class="form-control" placeholder="Name of Entrepreneur/Applicant" id="name" name="name" required>
@@ -241,7 +241,9 @@
 			    
 			    <div class="form-group">
 			      <label for="socialcategory"><b>5. Social Category</b></label>
-			      <select type="text" class="form-control" id="socialcategory" name="socialcategory" required></select>
+			      <select type="text" class="form-control" id="socialcategory" name="socialcategory" required>
+              <option>Social Category One</option>
+            </select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -262,7 +264,7 @@
 
 			    <div class="form-group">
 			      <label for="organisationtype"><b>8. Type Of Organisation</b></label>
-			      <select type="text" class="form-control" id="organisationtype" name="organisationtype" required><option></option></select>
+			      <select type="text" class="form-control" id="organisationtype" name="organisationtype" required><option>Organization One</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -292,7 +294,7 @@
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			   
-			    <button type="Next" class="btn btn-primary btn1 btn_width">Next</button>
+			    <button type="submit" class="btn btn-primary btn1 btn_width">Next</button>
 			    </form>
 	</div>
 </div>
@@ -668,5 +670,9 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js"></script>
+<!--end :: development-->
 </body>
 </html>

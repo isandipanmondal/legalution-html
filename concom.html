@@ -500,28 +500,15 @@
 
      <h2 class="text-center"><b>REQUEST</b> A CALL BACK</h2>
         <div class="text-center">
-        <form>
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Phone Number">
-        <select class="">
-        <option>I Would Like to Discuss</option>
-        </select>
-        <input class="btn btn-outline-light text-white call-back_button" type="submit" value="SUBMIT">
-        </form>
+          <form id="calback_request">
+            <input type="text" placeholder="Name" name="call_name" id="call_name">
+            <input type="text" placeholder="Phone Number" name="call_phone" id="call_phone">
+            <select class="">
+            <option>I Would Like to Discuss</option>
+            </select>
+            <input class="btn btn-outline-light text-white call-back_button" type="submit" value="SUBMIT">
+          </form>
         </div>
-
-
-    <!-- <h2 class="text-center"><b>REQUEST</b> A CALL BACK</h2>
-        <div class="text-center">
-        <form>
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Phone Number">
-        <select>
-        <option>I Would Like to Discuss</option>
-        </select>
-        <input class="btn btn-outline-light text-white" type="submit" value="SUBMIT">
-        </form>
-        </div> -->
     </div>
 </div>
 
@@ -692,5 +679,9 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js"></script>
+<!--end :: development-->
 </body>
 </html>

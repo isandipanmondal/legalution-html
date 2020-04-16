@@ -179,8 +179,7 @@
 		<div class="col-md-6 col-sm-12 col-12 pad_bottom">
 			<div class="file_complaints">
 			<h3>File Complaints</h3><p>Submit Your Complaint Here</p>
-							
-				<form action="/action_page.php" class="needs-validation" novalidate>
+      <form action="concom_form2.html" class="needs-validation" id="complainFrm1">
 			    <div class="form-group">
 			      <label for="name"><b>Name <span>*</span></b></label>
 			      <input type="text" class="form-control" id="name" name="name" required>
@@ -229,13 +228,13 @@
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
-			    <div class="form-group">
+			    <!--div class="form-group">
 			      <label for="Attachment"><b>Attachment<span>*</span></b></label>
 			      <input type="file" class="form-control" placeholder="Photo/Document" id="Attachment" name="Attachment" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
-			    </div>
-			    <div class="text-center"><button class="btn1 btn_width"><a href="concom_form2.html">Next</a></button></div>
+			    </div-->
+          <div class="text-center"><button class="btn1 btn_width" type="submit">Next</button></div>
 			    </form>
 
 			</div>
@@ -402,5 +401,9 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js?ss"></script>
+<!--end :: development-->
 </body>
 </html>

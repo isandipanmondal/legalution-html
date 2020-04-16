@@ -1,5 +1,4 @@
 <?php
-
 define('recieverEmail',"legalution.in@gmail.com");
 define('printLog',false);
 //get mail headers 
@@ -19,7 +18,7 @@ function detail_enquery($data){
     //mail function of the server default called for send the mail with sunject 
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
-    $msg='Thank you, Your request send to our authorized person, we contact you very soon.';
+    $msg='Thank you, Your request send to our authorized person, we will contact you very soon.';
     return_response($status=1,$msg,$data=array());
 }
 
@@ -32,7 +31,7 @@ function callback_request($data){
     //mail function of the server default called for send the mail with sunject 
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
-    $msg='Thank you, Your request send to our authorized person, we contact you very soon.';
+    $msg='Thank you, Your request send to our authorized person, we will contact you very soon.';
     return_response($status=1,$msg,$data=array());
 }
 
@@ -79,6 +78,7 @@ function customer_complain(){
     $message .="\nPayment : ".$_GET['Payment'];
     
     multi_attach_mail(recieverEmail,$subject,$message,$files);
+    header("Location:concom.html");
 }
 
 function multi_attach_mail($to, $subject, $message, $files = array(),$isFormFile=true){
@@ -252,25 +252,26 @@ function gst_application($data){
 //udyog adhar registration section 
 function uar_basic_info($data){
     common_print($data);
+    $maildata = $data;
     $subject="Customer Filling Udyog Aadhaar Registration Form";
     $message = "Hi,\nUdyog Aadhaar Registration form details are as follows\n";
-    $message .="\nApplicant Name : ".$_POST['name'];
-    $message .="\nApplicant Phone : ".$_POST['mobileno'];
-    $message .="\nApplicant Email : ".$_POST['Email'];
-    $message .="\nApplicant Aadhaar : ".$_POST['aadhaar'];
-    $message .="\nSocial Category : ".$_POST['socialcategory'];
-    $message .="\nApplicant Gender : ".$_POST['gender'];
-    $message .="\nBusiness Name : ".$_POST['business'];
-    $message .="\nBusiness Type : ".$_POST['organisationtype'];
-    $message .="\nBusiness Activity : ".$_POST['businessactivity'];
-    $message .="\nPAN : ".$_POST['PAN'];
-    $message .="\nBank A/C : ".$_POST['acno'];
-    $message .="\nBank IFSC Code : ".$_POST['IFSCCode'];
+    $message .="\nApplicant Name : ".$maildata['name'];
+    $message .="\nApplicant Phone : ".$maildata['mobileno'];
+    $message .="\nApplicant Email : ".$maildata['Email'];
+    $message .="\nApplicant Aadhaar : ".$maildata['aadhaar'];
+    $message .="\nSocial Category : ".$maildata['socialcategory'];
+    $message .="\nApplicant Gender : ".$maildata['gender'];
+    $message .="\nBusiness Name : ".$maildata['business'];
+    $message .="\nBusiness Type : ".$maildata['organisationtype'];
+    $message .="\nBusiness Activity : ".$maildata['businessactivity'];
+    $message .="\nPAN : ".$maildata['PAN'];
+    $message .="\nBank A/C : ".$maildata['acno'];
+    $message .="\nBank IFSC Code : ".$maildata['IFSCCode'];
     
     //mail function of the server default called for send the mail with sunject 
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
-    $msg='';
+    $msg='Thanks you, we will contact with you very soon.';
     return_response($status=1,$msg,$data=array());
 
 }
@@ -651,10 +652,10 @@ function call_curl($endpath="",$payload=array(),$mode="post"){
 	$paymentLink="https://test.instamojo.com/api/1.1/";
 	if($is_live){
 		$paymentLink="https://instamojo.com/api/1.1/";
-		$insta_api_key="test_d7520e50f5b34f403884e2c059b";
-		$insta_auth_token="test_cc3ece5ae0ddfe81287180b625c";
-		$insta_salt="52d3c20f842f4f54859a14bf13ed1bb6";
-	}
+		$insta_api_key="d66166a28b21b167e7221a273deb8fcf";
+		$insta_auth_token="926792f82702cbdcd68f15ac339b1472";
+		$insta_salt="01103adc1aba4e948b0e3acf950d06f6";
+    }
 	$header = array(
 	"X-Api-Key:$insta_api_key",
 	"X-Auth-Token:$insta_auth_token");

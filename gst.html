@@ -207,7 +207,7 @@
 	
 	
 	<div class="col-md-6 col-12 frm_pad-btm">  
-		<form action="/action_page.php" class="needs-validation gst_frm-bodr" novalidate>
+		<form action="gst_form1.html" class="needs-validation gst_frm-bodr" id="gst_form_basic_info">
       <div class="gst_frm-text">Legalution offer online easy process to registration for GST from Rs.999/- all inclusive fee.</div> 
       <div class="form-group ">
       <label for="name"><b>Name</b></label>
@@ -229,7 +229,7 @@
       </div>
 
              
-        <div class="text-center"><button type="Submit" class="btn btn-primary btn_width bg-white"><a href="gst_form1.html" style="color:#333;">GET STARTED</a></button></div>
+        <div class="text-center"><button type="Submit" class="btn btn-primary btn_width bg-white" style="color:#333;">GET STARTED</button></div>
   </form> 
 	
 	</div>
@@ -392,7 +392,7 @@
         <li>GST Registration</li><li>A dedicated GST expert</li><li>Free Consultation</li><li>Fast ARN & TRN numbers generate</li><li>Call/Chat Support till you received</li><li>GST certificate</li><li>Get GST number in same day</li><br>
       </ul>
 
-      <div class="text-center"><button class="btn1">Buy Now</button></div>
+      <div class="text-center"><button class="btn1" data-payment_id="1">Buy Now</button></div>
     </div>
   </div>
   </div>
@@ -410,7 +410,7 @@
       <ul>
         <li>Free GST registration</li><li>GST return filling for 3 months<br>(Up to 350 entries per month)</li><li>GSTR-1 Return Filling</li><li>GSTR-3B Return Filling</li><li>A dedicated GST expert</li><li>Free Consultation</li><li>Fast ARN & TRN numbers generate</li><li>Call/Chat Support till you received</li><li>GST certificate</li><br>
       </ul>
-      <div class="text-center"><button class="btn1">Buy Now</button></div>
+      <div class="text-center"><button class="btn1" data-payment_id="2">Buy Now</button></div>
     </div>
     </div>
   </div>
@@ -427,7 +427,7 @@
       <ul>
         <li>Free GST registration</li><li>GST return filling for 3 months<br>(Up to 350 entries per month)</li><li>GSTR-1 Return Filling</li><li>GSTR-3B Return Filling</li><li>A dedicated GST expert</li><li>Free Consultation</li><li>Fast ARN & TRN numbers generate</li><li>Call/Chat Support till you received</li><li>GST certificate</li><li>Input Tax Credit reconcillation GST certificate</li><br>
       </ul>
-      <div class="text-center"><button class="btn1">Buy Now</button></div>
+      <div class="text-center"><button class="btn1" data-payment_id="3">Buy Now</button></div>
     </div>
       </div>
       </div>
@@ -686,5 +686,31 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("button.btn1").click(function(e){
+			let payment_id = $(this).data("payment_id");
+			if(payment_id>0){
+        if(confirm("Are you sure, you want to buy")){
+          let data={payment_id:payment_id};
+          let path = "backend.php?func=gst_category_payment";
+          doAjaxCall(path,data,function(response){
+            console.log(response);
+            if(!response.error){
+              window.location=response.full_res.url;
+            }
+            else{
+              alert(response.msg);
+            }
+          });
+        }
+			}
+		});
+	});
+</script>
+<!--end :: development-->
 </body>
 </html>

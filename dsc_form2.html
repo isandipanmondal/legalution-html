@@ -181,10 +181,9 @@
 
 			<div style="border:1px solid #cdcdcd; padding:0px 30px 30px 30px">
 			<div class="text-center font_size-2">Your Details> Shipping> Payment></div>
-
-			
-				
-				<form action="/action_page.php" class="needs-validation" novalidate>
+      <span id="dsc_summery"></span>
+      <form action="backend.php?func=dsc_payment" class="needs-validation" id="dsc_form_2" method="post">
+        <input type="hidden" name="all_form_value" id="all_form_value">
 			    <div class="form-group">
 			      <label for="address"><b>Address</b></label>
 			      <textarea class="form-control" id="address" name="address" rows="8"></textarea>
@@ -244,8 +243,8 @@
 			    	<div class="row">
 			    		<div class="col-sm-6">
 			    			<div class="form-group">
-						      <label for="phno"><b>City/Village</b></label>
-						      <input type="text" class="form-control" id="phno" name="phno" required>
+						      <label for="city"><b>City/Village</b></label>
+						      <input type="text" class="form-control" id="city" name="city" required>
 						      <div class="valid-feedback">Valid.</div>
 						      <div class="invalid-feedback">Please fill out this field.</div>
 						    </div>
@@ -253,8 +252,8 @@
 
 			    		<div class="col-sm-6">
 			    			<div class="form-group" >
-						      <label for="phno"><b>Postal Code</b></label>
-						      <input type="text" class="form-control" id="phno" name="phno" required>
+						      <label for="pincode"><b>Postal Code</b></label>
+						      <input type="text" class="form-control" id="pincode" name="pincode" required>
 						      <div class="valid-feedback">Valid.</div>
 						      <div class="invalid-feedback">Please fill out this field.</div>
 						    </div>
@@ -394,5 +393,19 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js"></script>
+<script>
+  //now get all the value from the brouser memory 
+  let dsc_frm_key_value = getSavedData('dsc_frm_key_value');
+  if(dsc_frm_key_value.hasOwnProperty('clt')){
+    let str = dsc_frm_key_value.clt+' '+dsc_frm_key_value.ust+' '+dsc_frm_key_value.crt+' '+dsc_frm_key_value.ufor;
+    str+= ' validity '+dsc_frm_key_value.vld;
+    $("#dsc_summery").html(str);
+    $(".you_pay h4").html("Total Amount Rs. "+dsc_frm_key_value.amount+'/-');
+  }
+</script>
+<!--end :: development-->
 </body>
 </html>

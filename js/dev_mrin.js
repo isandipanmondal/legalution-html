@@ -4,8 +4,497 @@ $(document).ready(function(){
     getBasePath();
     talk_io_widget();
     console.log(baseUrl);
+    //CUSTOMER INQUERY SECTION
+    //validator with ajax call for details inquery of services
+    $("#detail_inquery_frm").validate({
+        rules:{
+            yn:{
+                required:true,
+            },
+            eid:{
+                required:true,
+                email:true,
+            },
+            mob:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            }
+        },
+        messages:{
+            yn:{
+                required:'',
+            },
+            eid:{
+                required:'',
+                email:'',
+            },
+            mob:{
+                required:'',
+                digits:'',
+                minlength:'',
+                maxlength:'',
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            let path = "backend.php?func=detail_enquery";
+            let data={
+                name:$("#yn").val(),
+                email:$("#eid").val(),
+                phone:$("#mob").val(),
+                service:$("#serv").val(),
+            };
+            doAjaxCall(path,data,function(response){
+                if(!response.error){
+                    //reset the form
+                    form.reset();
+                }
+                alert(response.msg);
+            });
+        }
+    });
 
-    //rti related form section 
+    //validate with ajax call for callback request for service details
+    $("#calback_request").validate({
+        rules:{
+            call_name:{
+                required:true,
+                maxlength:100,
+            },
+            call_phone:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            }
+        },
+        messages:{
+            call_name:{
+                required:'',
+                maxlength:'',
+            },
+            call_phone:{
+                required:'',
+                digits:'',
+                minlength:'',
+                maxlength:'',
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            let path = "backend.php?func=callback_request";
+            let data={
+                name:$("#call_name").val(),
+                phone:$("#call_phone").val(),
+            };
+            doAjaxCall(path,data,function(response){
+                alert(response.msg);
+                if(!response.error){
+                    //reset the form
+                    form.reset();
+                }
+            });
+        }
+    });
+    //END :: CUSTOMER INQUERY
+
+    //DIGITAL SIGNATURE SECTION
+    $("#sbmt").click(function(e){
+        e.preventDefault();
+        $("#frm_dsc").submit();
+    });
+    //validate the form value and submit
+    $("#frm_dsc").validate({
+        rules:{
+            ufor:{
+                required:true,
+            }
+        },
+        messages:{
+            ufor:{
+                required:'',
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            //need to get all value of the form 
+            let frmData = $(form).serializeArray();
+            let dsc_frm_key_value={};
+            $.each(frmData,function(i,item){
+                dsc_frm_key_value[item.name] = item.value;
+            });
+            // cleare browser data
+            cleareData('dsc_frm_data');
+            cleareData('dsc_frm_key_value');
+            //saving the form values
+            doSaveData('dsc_frm_data',frmData);
+            doSaveData('dsc_frm_key_value',dsc_frm_key_value);
+            //form key values 
+            form.submit();
+        }
+    });
+
+    // basic details form of customer :: form 1
+    $("#dsc_form_1").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            email:{
+                required:true,
+                email:true,
+            },
+            phno:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            quantity:{
+                required:true,
+                digits:true,
+                min:1,
+            }
+        },
+        messages:{},
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            //saving the data into the storage 
+            let new_frmData = $(form).serializeArray();
+            let old_dsc_frm_data = getSavedData('dsc_frm_data');
+            //merge old and new one 
+            let dsc_frm_key_value={};
+            let frmData = $.merge(new_frmData,old_dsc_frm_data);
+            console.log(frmData);
+            $.each(frmData,function(i,item){
+                dsc_frm_key_value[item.name] = item.value;
+            });
+            //saving
+            doSaveData('dsc_frm_data',frmData);
+            doSaveData('dsc_frm_key_value',dsc_frm_key_value);
+
+            //update the form get value and travel to the next page
+            let search="";
+            $.each(old_dsc_frm_data,function(i,item){
+                if(search.length>0){
+                    search +='&'+item.name+'='+item.value;
+                }
+                else{
+                    search=item.name+'='+item.value;
+                }
+            });
+            $("#dsc_frm_val").val(location.search.replace("?",""));
+            let path = "backend.php"+location.search+'&func=customer_dsc_enquery';
+            if(search.length>0){
+                $("#dsc_frm_val").val(search);
+                path = "backend.php?"+search+'&func=customer_dsc_enquery';
+            }
+            
+            // get all the dsc plane details
+            
+            let data={
+                name:$("#name").val(),
+                email:$("#email").val(),
+                phone:$("#phno").val(),
+                quantity:$("#quantity").val(),
+            };
+
+            doAjaxCall(path,data,function(response){
+                if(!response.error){
+                    //reset the form
+                    form.submit();
+                }
+            });
+        }
+    });
+
+    // customer address details :: form 2 
+    $("#dsc_form_2").validate({
+        rules:{
+            address:{
+                required:true,
+                maxlength:200,
+            },
+            state:{
+                required:true,
+            },
+            city:{
+                required:true,
+                maxlength:100,
+            },
+            pincode:{
+                required:true,
+                digits:true,
+                minlength:6,
+                maxlength:6,
+            }
+        },
+        messages:{
+            
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            //saving the data into the storage 
+            let new_frmData = $(form).serializeArray();
+            let old_dsc_frm_data = getSavedData('dsc_frm_data');
+            //merge old and new one 
+            let dsc_frm_key_value={};
+            let frmData = $.merge(new_frmData,old_dsc_frm_data);
+            console.log(frmData);
+            $.each(frmData,function(i,item){
+                dsc_frm_key_value[item.name] = item.value;
+            });
+            //saving 
+            doSaveData('dsc_frm_data',frmData);
+            doSaveData('dsc_frm_key_value',dsc_frm_key_value);
+            // now save all the value  as json string for post 
+            $("#all_form_value").val(JSON.stringify(dsc_frm_key_value));
+            form.submit();
+        }
+    });
+
+    //END :: DIGITAL SIGNITURE
+
+    //COMPLAIN SECTION
+    //basic details of complain 
+    $("#complainFrm1").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            mno:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            Email:{
+                required:true,
+                email:true,
+            },
+            Address:{
+                required:true,
+                maxlength:200,
+            },
+            cacn:{
+                required:true,
+                maxlength:100,
+            },
+            comsub:{
+                required:true,
+                maxlength:150,
+            },
+            cata:{
+                required:true,
+                maxlength:150,
+            },
+            Payment:{
+                required:true,
+                number:true,
+                maxlength:8,
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            // maild basic details of the user who filled the data
+            let frmdata = $(form).serializeArray();
+            //now save all the form data into the storage 
+            let complain_form_key_value={};
+            $.each(frmdata,function(i,item){
+                complain_form_key_value[item.name] = item.value;
+            });
+            cleareData('complain_form_key_value');
+            doSaveData('complain_form_key_value',complain_form_key_value);
+            //how send send email about this complain
+            let path = "backend.php?func=complaine_basic_info";
+            doAjaxCall(path,complain_form_key_value,function(response){
+                form.submit();
+            });
+        }
+    });
+
+    //customer complaine form 2
+    $("#complainFrm2").validate({
+        rules:{
+            doc:{
+                required:true,
+                maxlength:200,
+            },
+            state:{
+                required:true,
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            //update the url of the form 
+            let frmaction = $(form).attr('action')+location.search+'&func=customer_complain';
+            $(form).attr('action',frmaction);
+            form.submit();
+        }
+    });
+
+    //END :: COMPLAIN
+
+    //REGISTRATION AND FILLING SECTION 
+    // GST registrations basic details of customer 
+    $("#gst_form_basic_info").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            email:{
+                required:true,
+                email:true,
+            },
+            phone:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            // maild basic details of the user who filled the data
+            let frmdata = $(form).serializeArray();
+            //now save all the form data into the storage 
+            let gst_form_key_value={};
+            $.each(frmdata,function(i,item){
+                gst_form_key_value[item.name] = item.value;
+            });
+            cleareData('gst_form_key_value');
+            doSaveData('gst_form_key_value',gst_form_key_value);
+            //how send send email about this complain
+            let path = "backend.php?func=gst_basic_info";
+            doAjaxCall(path,gst_form_key_value,function(response){
+                form.submit();
+            });
+        }
+    });
+
+    //GST application form validation 
+    $("#gst_application_form").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            phone:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            email:{
+                required:true,
+                email:true,
+            },
+            gst_charge:{
+                required:true
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+    });
+
+    //udyog aadhar registration
+    $("#uar_form").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            mobileno:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            Email:{
+                required:true,
+                email:true,
+            },
+            aadhaar:{
+                required:true,
+                digits:true,
+                minlength:16,
+                maxlength:16,
+            },
+            business:{
+                required:true,
+                maxlength:200,
+            },
+            PAN:{
+                required:true,
+                minlength:10,
+                maxlength:10,
+            },
+            acno:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:18,
+            },
+            IFSCCode:{
+                required:true,
+                minlength:5,
+                maxlength:18,
+            },
+            businessactivity:{
+                required:true,
+                maxlength:200,
+            }
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            let formdata = $(form).serializeArray();
+            //now save all the form data into the storage 
+            let uar_form_key_value={};
+            $.each(formdata,function(i,item){
+                uar_form_key_value[item.name] = item.value;
+            });
+            cleareData('uar_form_key_value');
+            doSaveData('uar_form_key_value',uar_form_key_value);
+            //how send send email about this complain
+            let path = "backend.php?func=uar_basic_info";
+            doAjaxCall(path,uar_form_key_value,function(response){
+                console.log(response);
+                if(response.msg.length>0){
+                    alert(response.msg);
+                }
+                //form.reset();
+                //form.submit();
+            });
+        }
+    });
+    //END :: REGISTRATION AND FILLING 
+
+    //RTI SECTION
+    //rti form section 
     $("#rti_form1").validate({
         rules:{
             name:{
@@ -82,7 +571,8 @@ $(document).ready(function(){
             }
         });
     });
-
+    //END RTI 
+    
 });
 
 //basepath retrive

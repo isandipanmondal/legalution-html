@@ -182,9 +182,10 @@
 		
       <div style="border:1px solid #cdcdcd; padding:0px 30px 30px 30px">
 
-			<div class="text-center font_size-2">Your Details> Shipping> Payment></div>
-
-						<form action="dsc_form2.html" class="needs-validation" novalidate>
+      <div class="text-center font_size-2">Your Details> Shipping> Payment></div>
+      <span id="dsc_summery"></span>
+					<form action="dsc_form2.html" class="needs-validation" id="dsc_form_1">
+          <input type="hidden" name="dsc_frm_val" id="dsc_frm_val" >
 			    <div class="form-group">
 			      <label for="name"><b>Name</b></label>
 			      <input type="text" class="form-control" id="name" name="name" required>
@@ -218,7 +219,7 @@
 			    	 <h4 class="you_pay">You Pay Rs. 699.00/-</h4>
 			    </div>
 			   
-			    <div class=""><button type="Next" class="btn1 btn_width"><a href="dsc_form2.html">Next</a></button></div>
+			    <div class=""><button type="Next" class="btn1 btn_width" type="submit">Next</button></div>
 			    </form>
 
 			</div>
@@ -341,5 +342,19 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js?uuuu"></script>
+<script>
+  //now get all the value from the brouser memory 
+  let dsc_frm_key_value = getSavedData('dsc_frm_key_value');
+  if(dsc_frm_key_value.hasOwnProperty('clt')){
+    let str = dsc_frm_key_value.clt+' '+dsc_frm_key_value.ust+' '+dsc_frm_key_value.crt+' '+dsc_frm_key_value.ufor;
+    str+= ' validity '+dsc_frm_key_value.vld;
+    $("#dsc_summery").html(str);
+    $(".you_pay").html("You Need To Pay Rs. "+dsc_frm_key_value.amount+"/-");
+  }
+</script>
+<!--end :: development-->
 </body>
 </html>

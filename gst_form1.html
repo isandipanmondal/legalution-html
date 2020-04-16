@@ -180,7 +180,7 @@
 			<h2>GST Registration Form</h2><p>Completely Online Process<br>Get Your Business Registered Under GST</p>
 			
 				
-				<form action="/action_page.php" class="needs-validation" novalidate>
+      <form action="backend.php?func=gst_application" method="post" class="needs-validation" id="gst_application_form" enctype="multipart/form-data">
 			    <div class="form-group">
 			      <label for="name"><b>Applicant Full Name</b></label>
 			      <input type="text" class="form-control" id="name" name="name" required>
@@ -188,14 +188,14 @@
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="mno"><b>Mobile No.</b></label>
-			      <input type="text" class="form-control" id="mno" name="mno" required>
+			      <label for="phone"><b>Mobile No.</b></label>
+			      <input type="text" class="form-control" id="phone" name="phone" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="Email"><b>Email Id.</b></label>
-			      <input type="text" class="form-control" id="Email" name="Email" required>
+			      <label for="email"><b>Email Id.</b></label>
+			      <input type="text" class="form-control" id="email" name="email" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -213,13 +213,13 @@
 			    </div>
 			    <div class="form-group">
 			      <label for="Business"><b>Business Name</b></label>
-			      <select type="text" class="form-control" id="Business" name="Business" required><option></option></select>
+			      <select type="text" class="form-control" id="Business" name="Business" required><option>Personal Business</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
 			      <label for="Nature_of_Business"><b>Nature of Business</b></label>
-			      <select type="text" class="form-control" id="Nature_of_Business" name="Nature_of_Business" required><option></option></select>
+			      <select type="text" class="form-control" id="Nature_of_Business" name="Nature_of_Business" required><option>Private Firms</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -283,20 +283,20 @@
 
 			  <div style="color: #0073da">
 	          <label>
-	          <input class="radio" type="radio"><b> GST Registration (INR 899)</b></label>
+	          <input class="radio" type="radio" name="gst_charge" value="1" checked><b> GST Registration (INR 899)</b></label>
 	          </div>
 
 	          <div style="color: #0073da">
 	          <label>
-	          <input class="radio" type="radio"><b> GST Registration + 3 Months GST Return Filing (INR 1499)</b></label>
+	          <input class="radio" type="radio" name="gst_charge" value="2"><b> GST Registration + 3 Months GST Return Filing (INR 1499)</b></label>
 	          </div>
 
 	          <div style="color: #0073da">
 	          <label>
-	          <input class="radio" type="radio"><b> GST Registration + 12 Months GST Return Filing (INR 5999)</b></label>
+	          <input class="radio" type="radio" name="gst_charge" value="3"><b> GST Registration + 12 Months GST Return Filing (INR 5999)</b></label>
 	          </div>
 			  <br>
-			  <div class="text-center"><button type="Next" class="btn1 btn_width"><a href="concom_form2.html">Submit</a></button></div>
+			  <div class="text-center"><button type="submit" class="btn1 btn_width">Submit</button></div>
 			  </form>
 
 			</div>
@@ -625,5 +625,20 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js?ssg"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+  //get if any data saved into the stor
+  let gst_form_key_value = getSavedData('gst_form_key_value');
+  if(gst_form_key_value.hasOwnProperty('name')){
+    $("input[name='name']").val(gst_form_key_value.name);
+    $("input[name='email']").val(gst_form_key_value.email);
+    $("input[name='phone']").val(gst_form_key_value.phone);
+  }
+});
+</script>
+<!--end :: development-->
 </body>
 </html>

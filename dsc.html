@@ -145,7 +145,8 @@
     <div style="background-color:#ffffff">
     <div class="row">
     	<div class="col-sm-7" style="border-right:1px solid #cccccc">
-        	<form id="frm_dsc" style="padding:10px">
+			<form id="frm_dsc" style="padding:10px" action="dsc_form1.html">
+				<input type="hidden" name="amount" id="amount" value="699.00">
             <table>
             <tr><td><label>Usage type:</label></td><td colspan="3">
             	<select id="ufor" name="ufor" class="ufor" style="border-radius:5px; border:1px solid #0e72c8">
@@ -172,8 +173,8 @@
         <p><span id="signtype">SIGNATURE</span> - <span id="usertype">INDIVIDUAL</p>
         <p id="usagefor">For</p>
         <P id="yr" style="font-weight:bold;">1 YEAR</P>
-        <div><span id="pr" style="font-size:18px; font-weight: bold;">Rs. 799.00 /- </span><span class="prt2" style="font-size:9px">(Inclusive GST)</span></div>
-        <div><button id="sbmt" class="bg-primary text-white"><a href="dsc_form1.html">Buy Now</a></button></div>
+        <div><span id="pr" style="font-size:18px; font-weight: bold;">Rs. 699.00 /- </span><span class="prt2" style="font-size:9px">(Inclusive GST)</span></div>
+        <div><button id="sbmt" class="bg-primary text-white"><a href="javascript:void(0);">Buy Now</a></button></div>
         </div>
     </div>
     </div> 
@@ -194,7 +195,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="1">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -207,7 +208,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="2">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -220,7 +221,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="3">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
   	</div>
@@ -238,7 +239,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="4">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -251,7 +252,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="5">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -264,7 +265,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="6">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
   	</div>
@@ -281,7 +282,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="7">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -294,7 +295,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="8">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -307,7 +308,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="9">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
   	</div>
@@ -325,7 +326,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="10">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -338,7 +339,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="11">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -351,7 +352,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="12">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
   	</div>
@@ -368,7 +369,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="13">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -381,7 +382,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="14">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
 	  <div class="card card_margin hover-scale">
@@ -394,7 +395,7 @@
 	      	<p class="card-text">Including GST 18%</p>
 	      	<p class="card-text">Free Delivery</p>
 	      	<button class="btn1">Product Details</button><br>
-	      	<button class="btn2 bg-primary text-white">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
+	      	<button class="btn2 bg-primary text-white" data-payment_id="15">Buy | <i class="fa fa-rupee" aria-hidden="true"></i> 700</button>
 	    </div>
 	  </div>
   	</div>
@@ -526,14 +527,14 @@ Legalution.in includes services, provided PAN INDIA basis. It involves process f
 	<div id="self2_ch">
     <h2 class="text-center"><b>REQUEST</b> A CALL BACK</h2>
         <div class="text-center">
-        <form>
-        <input type="text" placeholder="Name">
-        <input type="text" placeholder="Phone Number">
-        <select class="">
-        <option>I Would Like to Discuss</option>
-        </select>
-        <input class="btn btn-outline-light text-white call-back_button" type="submit" value="SUBMIT">
-        </form>
+		<form id="calback_request">
+			<input type="text" placeholder="Name" name="call_name" id="call_name">
+			<input type="text" placeholder="Phone Number" name="call_phone" id="call_phone">
+			<select class="">
+			<option>I Would Like to Discuss</option>
+			</select>
+			<input class="btn btn-outline-light text-white call-back_button" type="submit" value="SUBMIT">
+		</form>
         </div>
   </div>
 </div>
@@ -704,5 +705,31 @@ $(document).ready(function(){
   });
 });
 </script>
+<!--development section-->
+<script src="js/jquery.validate.min.js"></script>
+<script src="js/dev_mrin.js?hj"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("button.btn2").click(function(e){
+			let payment_id = $(this).data("payment_id");
+			if(payment_id>0){
+				if(confirm("Are you sure, you want to buy")){
+					let data={payment_id:payment_id};
+					let path = "backend.php?func=dci_category_payment";
+					doAjaxCall(path,data,function(response){
+						console.log(response);
+						if(!response.error){
+							window.location=response.full_res.url;
+						}
+						else{
+							alert(response.msg);
+						}
+					});
+				}
+			}
+		});
+	});
+</script>
+<!--end :: development-->
 </body>
 </html>
