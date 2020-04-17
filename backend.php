@@ -645,17 +645,11 @@ function payment_gateway_webhook(){
 }
 
 function call_curl($endpath="",$payload=array(),$mode="post"){
-	$is_live=false;
-	$insta_api_key="test_99ce9795a8d21b25e793c611873";
-	$insta_auth_token="test_095b047ffff8bea43a93dcfeeb2";
-	$insta_salt="e0f3bd2d04ec47d3b4816dd9d75cfc38";
-	$paymentLink="https://test.instamojo.com/api/1.1/";
-	if($is_live){
-		$paymentLink="https://instamojo.com/api/1.1/";
-		$insta_api_key="d66166a28b21b167e7221a273deb8fcf";
-		$insta_auth_token="926792f82702cbdcd68f15ac339b1472";
-		$insta_salt="01103adc1aba4e948b0e3acf950d06f6";
-    }
+	$paymentLink="https://www.instamojo.com/api/1.1/";
+    $insta_api_key="d66166a28b21b167e7221a273deb8fcf";
+    $insta_auth_token="926792f82702cbdcd68f15ac339b1472";
+    $insta_salt="01103adc1aba4e948b0e3acf950d06f6";
+    
 	$header = array(
 	"X-Api-Key:$insta_api_key",
 	"X-Auth-Token:$insta_auth_token");
@@ -679,7 +673,7 @@ function call_curl($endpath="",$payload=array(),$mode="post"){
 		curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($payload));
 	}
 	$response = curl_exec($ch);
-	curl_close($ch);
+    curl_close($ch);
 	return json_decode($response,true);
 }
 
