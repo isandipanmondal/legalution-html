@@ -528,6 +528,14 @@ $(document).ready(function(){
                 minlength:6,
                 maxlength:6,
             },
+            dept_name:{
+                required:true,
+                maxlength:100,
+            },
+            topic:{
+                required:true,
+                maxlength:200,
+            },
         },
         errorElement:"em",
         errorClass:"text-danger",
@@ -541,11 +549,15 @@ $(document).ready(function(){
                 rti_form_key_value[item.name] = item.value;
             });
             cleareData('rti_form_key_value');
-            doSaveData('rti_form_key_value',rti_form_key_value);
+            
             //how send send email about this complain
             let path = "backend.php?func=rti_basic_info";
             doAjaxCall(path,rti_form_key_value,function(response){
-                form.submit();
+                if(!response.error){
+                    rti_form_key_value['registration_id']=response.full_res.registration_id;
+                    doSaveData('rti_form_key_value',rti_form_key_value);
+                    form.submit();
+                }
             });
         }
     });

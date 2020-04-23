@@ -173,7 +173,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-12 price_center">
-  <br><br><h3>Only Rs. 299/-</h3><b><p>Registration ID: LTRTI- 2020/32648<br>EXPERT WILL CALL FOR REQUIRED DETAILS.<br>RTI Application Fees Rs, 299/- (No Hidden Charges) Include: Call from RTI Expert + Postal Charges + RTI Drafting Fees + Processing Fee GST 18%</p></b>
+  <br><br><h3>Only Rs. 299/-</h3><b><p id="registration_id">Registration ID: <span>LTRTI- 2020/32648</span><br>EXPERT WILL CALL FOR REQUIRED DETAILS.<br>RTI Application Fees Rs, 299/- (No Hidden Charges) Include: Call from RTI Expert + Postal Charges + RTI Drafting Fees + Processing Fee GST 18%</p></b>
 
 <br><br>	
 	<div class="form-group form-check">
@@ -322,6 +322,15 @@ $(document).ready(function(){
 <!--development section-->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/dev_mrin.js?ss"></script>
+<script>
+  $(document).ready(function(){
+    let rti_form_key_value = getSavedData('rti_form_key_value');
+    console.log(rti_form_key_value);
+    if(rti_form_key_value.hasOwnProperty('registration_id')){
+      $("#registration_id span").html(rti_form_key_value.registration_id);
+    }
+  });
+</script>
 <!--end :: development-->
 </body>
 </html>

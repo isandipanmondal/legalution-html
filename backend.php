@@ -147,6 +147,8 @@ function multi_attach_mail($to, $subject, $message, $files = array(),$isFormFile
 //rti application basic information 
 function rti_basic_info($data){
     common_print($data);
+    //create random a Registration ID 
+    $registration_id = "LTRTI-".date("Y")."/".rand(9999,10000);
     $subject="Basic details of RTI application";
     $message = "Hi,\nCustomer fill RTI allication, details are as follows\n";
     $message .="\nApplicant Name : ".$data['name'];
@@ -156,11 +158,14 @@ function rti_basic_info($data){
     $message .="\nApplicant Address : ".$data['address'];
     $message .="\nStates: ".$data['states'];
     $message .="\nPIN : ".$data['pin'];
+    $message .="\nName of Govt. Department : ".$data['dept_name'];
+    $message .="\nDescription of The Topic : ".$data['topic'];
+    $message .="\n\Registration Id : ".$registration_id;
     //mail function of the server default called for send the mail with sunject 
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
     $msg='';
-    return_response($status=1,$msg,$data=array());
+    return_response($status=1,$msg,array('registration_id'=>$registration_id));
 }
 
 //payment section for rti 
@@ -171,11 +176,13 @@ function rti_payment_request($data){
     $total_payment='299';
     $is_urgent_work = $data['urgent_work'];
     $subject="RTI Application for ".$data['states'].', '.$data['pin'];
+    $subject="RTI Application ID ".$data['registration_id'];
     if($is_urgent_work){
         $total_payment=353;
         $subject.=". Urgent work.";
     }
-    
+    //apply 18% chrge 
+    $total_payment  = $total_payment + ceil(($total_payment*18)/100);
     //now make payment for this application
     $amout=$total_payment;
     $purpose=$subject;
