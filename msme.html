@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+Type Of Organisation<!DOCTYPE html>
 <html lang="en">
 <head>
   <title>Legalution</title>
@@ -141,7 +141,7 @@
         <a class="nav-link" href="dsc.html">Buy Digital Signature</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">People Right </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> Application </a>
         <div class="dropdown-menu">
         <a class="dropdown-item" href="concom.html">Consumer Complaint</a>
         <a class="dropdown-item" href="rti.html">RTI Application</a>
@@ -171,25 +171,26 @@
     <div class="row">
       <div class="col-md-3 col-sm-12 col-12">
         <div class="total_cased main-box">
-          <h4>1560</h4>
+          <!--<h4>1560</h4>-->
+          <h4>746</h4>
           <h6>Total Cased Filed</h6>
         </div>
       </div>
       <div class="col-md-3 col-sm-12 col-12">
         <div class="micro_enterprises main-box">
-          <h4>456</h4>
+          <h4>359</h4>
           <h6>Micro Enterprises Cased Filed</h6>
         </div>
       </div>
       <div class="col-md-3 col-sm-12 col-12">
         <div class="small_enterprises main-box">
-          <h4>389</h4>
+          <h4>246</h4>
           <h6>Small Enterprises Cased Filed</h6>
         </div>
       </div>
       <div class="col-md-3 col-sm-12 col-12">
         <div class="medium_enterprises main-box">
-          <h4>715</h4>
+          <h4>141</h4>
           <h6>Medium Enterprises Cased Filed</h6>
         </div>
       </div>
@@ -212,84 +213,101 @@
 		<h3>Udyog Aadhaar Registration Form</h3><p>Get Your Bussiness Registred Under Govt. of India</p>
 		<form action="" class="needs-validation" id="uar_form">
 			    <div class="form-group">
-			      <label for="name"><b>1. Name of Entrepreneur/Applicant</b></label>
+			      <label for="name"><b>1. Name of Entrepreneur/Applicant / उद्यमी का नाम</b></label>
 			      <input type="text" class="form-control" placeholder="Name of Entrepreneur/Applicant" id="name" name="name" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="Email"><b>2. Email Id.</b></label>
+			      <label for="Email"><b>2. Email Id. / ईमेल</b></label>
 			      <input type="text" class="form-control" placeholder="Email Id." id="Email" name="Email" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="mobileno"><b>3. Mobile No.</b></label>
+			      <label for="mobileno"><b>3. Mobile No. / मोबाइल नंबर</b></label>
 			      <input type="text" class="form-control" placeholder="Mobile No." id="mobileno" name="mobileno" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="aadhaar"><b>4. Aadhaar Number</b></label>
+			      <label for="aadhaar"><b>4. Aadhaar Number / आधार नंबर</b></label>
 			      <input type="text" class="form-control" placeholder="Aadhaar Number" id="aadhaar" name="aadhaar" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    
 			    <div class="form-group">
-			      <label for="socialcategory"><b>5. Social Category</b></label>
+			      <label for="socialcategory"><b>5. Social Category / सामाजिक वर्ग</b></label>
 			      <select type="text" class="form-control" id="socialcategory" name="socialcategory" required>
-              <option>Social Category One</option>
+              <option>General</option>
+              <option>ST</option>
+              <option>SC</option>
+              <option>OBC</option>
             </select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="gender"><b>6. Gender</b></label>
+			      <label for="gender"><b>6. Gender/ लिंग</b></label>
 			      <select type="text" class="form-control" id="gender" name="gender" required><option>Male</option><option>Female</option><option>Other</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="business"><b>7. Name of Enterprise/Business</b></label>
+			      <label for="business"><b>7. Name of Enterprise/Business / उद्यम का नाम</b></label>
 			      <input type="text" class="form-control" id="business" name="business" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="organisationtype"><b>8. Type Of Organisation</b></label>
-			      <select type="text" class="form-control" id="organisationtype" name="organisationtype" required><option>Organization One</option></select>
+			      <label for="organisationtype"><b>8. Type Of Organisation / संगठन के प्रकार</b></label>
+			      <select type="text" class="form-control" id="organisationtype" name="organisationtype" required>
+			          <option>Proprietorship Firm</option>
+			          <option>Partnership Firm</option>
+			          <option>Limited Liability Partnership</option>
+			          <option>Private Limited</option>
+			          <option>Public Limited</option>
+			          <option>Co-operative Society</option>
+			          <option>Hindu Undivided Family</option>
+			          <option>Self Help Group</option>
+			          <option>Society">Society</option>
+			          <option>Trust</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 
 			    <div class="form-group">
-			      <label for="PAN"><b>9. PAN</b></label>
+			      <label for="PAN"><b>9. PAN / पैन नंबर</b></label>
 			      <input type="text" class="form-control" id="PAN" name="PAN" placeholder="PAN" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="acno"><b>10. Bank Account Number</b></label>
+			      <label for="acno"><b>10. Bank Account Number / बैंक खाता संख्या</b></label>
 			      <input type="text" class="form-control" id="acno" name="acno" placeholder="Bank Account Number" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="IFSCCode"><b>11. IFSC Code</b></label>
+			      <label for="IFSCCode"><b>11. IFSC Code / आईएफएस कोड</b></label>
 			      <input type="text" class="form-control" id="IFSCCode" name="IFSCCode" placeholder="IFSC Code" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="businessactivity"><b>12. Main Business Activity of Enterprise</b></label>
-			      <input type="text" class="form-control" placeholder="Main Business Activity of Enterprise" id="businessactivity" name="businessactivity" required>
+			      <label for="organisationtype"><b>12.Main Business Activity of Enterprise / इकाई का प्रमुख गतिविधि</b></label>
+			      <select type="text" class="form-control" id="organisationtype" name="organisationtype" required>
+			          <option>Select Activity of Enterprise</option>
+			          <option>Manufacturer</option>
+			          <option>Service provider</option>
+			          <option>Others</option></select>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -545,24 +563,25 @@ All categories of loans should be priced only with reference to the Base Rate of
 
 <!-- Footer -->
 <div id="footer" class="container-fluid">
-  <div class="container ft1">
-      <div class="row">
+	<div class="container ft1">
+  		<div class="row">
           <div class="col">
           <ul>
           <label class="text-color"><b><i>LEGALUTION.IN</i></b></label>
-          <li><a href="#">About Legalution</a></li>
+          <li><a href="about.html">About Legalution</a></li>
           <li><a href="#">Join Us</a></li>
-          <li><a href="#">Online Payment</a></li>
+          <li><a href="#">Career</a></li>
           <li><a href="#">Contact Us</a></li>
           </ul>
           </div>
           <div class="col">
           <ul>
           <label class="text-color"><b><i>PLATFORM</i></b></label>
-          <li><a href="#">Digital Signature Certificate</a></li>
-          <li><a href="#">RTI Application Online</a></li>
-          <li><a href="#">Cosumer Complain</a></li>
-          <li><a href="#">Legal Drafting</a></li>
+          <li><a href="dsc.html">Digital Signature Certificate</a></li>
+          <li><a href="rti.html">RTI Application Online</a></li>
+          <li><a href="concom.html">Cosumer Complain</a></li>
+          <li><a href="gst.html">GST Registration</a></li>
+          <li><a href="msme.html">MSME Registration</a></li>
           </ul>
           </div>
           <div class="col">
@@ -577,15 +596,15 @@ All categories of loans should be priced only with reference to the Base Rate of
           <div class="col">
           <ul>
           <label class="text-color" style="opacity:0;"><b><i>USAGE</i></b></label>
-          <li><a href="#">Confidentiality Policy</a></li>
+          <!--<li><a href="#">Confidentiality Policy</a></li>-->
           <li><a href="#">Disclaimer Policy</a></li>
-          <li><a href="#">Legalution Review</a></li>
+          <li><a href="http://legalution.in/#clsay">Legalution Review</a></li>
           </ul>
           </div>
         </div>
-    </div>
+  	</div>
   </div>
-<div class="sub_footer">
+   <div class="sub_footer">
     <div class="container">
         <div class="row ">
         <div class="col-sm-6 pad_none">
@@ -596,7 +615,7 @@ All categories of loans should be priced only with reference to the Base Rate of
         </div>
         <div class="col-sm-6">
            <div class="copyright">
-               <i>Copyright@2019 legalition.in | All Right Reserved</i>
+               <i>Copyright 2020 legalution.in [All Right Reserved]</i>
            </div>
            <div class="clearfix"></div>
         </div>

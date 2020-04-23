@@ -141,7 +141,7 @@
         <a class="nav-link" href="dsc.html">Buy Digital Signature</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">People Right </a>
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown"> Application </a>
         <div class="dropdown-menu">
         <a class="dropdown-item" href="concom.html">Consumer Complaint</a>
         <a class="dropdown-item" href="rti.html">RTI Application</a>
@@ -165,8 +165,8 @@
 <div class="container">
 
 		<div class="your_trusted"><h3>Your <b>trusted legal</b> partners for resolving <br>Consumer Complaints in India</h3>
-     <small class="text-center">"Thanks Legalution team, because of your support I was able to reach concern persons to resolve my dispute case with multiple stakeholders."<br>
-		- Kushal Prahladbhai Prajapati</small>
+     <!--<small class="text-center">"Thanks Legalution team, because of your support I was able to reach concern persons to resolve my dispute case with multiple stakeholders."<br>
+		- Kushal Prahladbhai Prajapati</small>-->
   </div>
 	</div>
 
@@ -181,7 +181,7 @@
 			<h3>File Complaints</h3><p>Submit Your Complaint Here</p>
       <form action="concom_form2.html" class="needs-validation" id="complainFrm1">
 			    <div class="form-group">
-			      <label for="name"><b>Name <span>*</span></b></label>
+			      <label for="name"><b>Full Name <span>*</span></b></label>
 			      <input type="text" class="form-control" id="name" name="name" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
@@ -205,29 +205,98 @@
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="cacn"><b>Complain Against Company Name</b></label>
+			      <label for="cacn"><b>Pin Code</b></label>
 			      <input type="text" class="form-control" id="cacn" name="cacn" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
 			    <div class="form-group">
-			      <label for="comsub"><b>Complain Subject</b></label>
-			      <input type="text" class="form-control" id="comsub" name="comsub" required>
-			      <div class="valid-feedback">Valid.</div>
-			      <div class="invalid-feedback">Please fill out this field.</div>
+			      <label for="comsub"><b>State</b></label>
+			      <select type="text" class="form-control" id="state" name="state" required>
+			          <option>West Bengal</option>
+			          <option>Andhra Pradesh</option>
+                        <option>Arunachal Pradesh</option>
+                        <option>Assam</option>
+                        <option>Bihar</option>
+                        <option>Chhattisgarh</option>
+                        <option>Goa</option>
+                        <option>Gujarat</option>
+                        <option>Haryana</option>
+                        <option>Himachal Pradesh</option>
+                        <option>Jharkhand</option>
+                        <option>Karnataka</option>
+                        <option>Kerala</option>
+                        <option>Madhya Pradesh</option>
+                        <option>Maharashtra</option>
+                        <option>Manipur</option>
+                        <option>Meghalaya</option>
+                        <option>Mizoram</option>
+                        <option>Nagaland</option>
+                        <option>Odisha</option>
+                        <option>Punjab</option>
+                        <option>Rajasthan</option>
+                        <option>Sikkim</option>
+                        <option>Tamil Nadu</option>
+                        <option>Telangana</option>
+                        <option>Tripura</option>
+                        <option>Uttar Pradesh</option>
+                        <option>Uttarakhand</option>
+                        <option>West Bengal</option>
+                        <option>Andaman and Nicobar Islands</option>
+                        <option>Chandigarh</option>
+                        <option>Dadar and Nagar Haveli</option>
+                        <option>Daman and Diu</option>
+                        <option>Delhi</option>
+                        <option>Lakshadweep</option>
+                        <option>Puducherry (Pondicherry)</option>
+                        <option>Jammu</option>
+                        <option>Kashmir</option>
+                        <option>Ladakh</option>
+			      <!--<div class="valid-feedback">Valid.</div>
+			      <div class="invalid-feedback">Please fill out this field.</div>-->
+			      </select>
 			    </div>
 			    <div class="form-group">
+			      <label for="comsub"><b>Complaint Category</b></label>
+			      <select type="text" class="form-control" id="state" name="state" required>
+			          <option>Airline</option>
+			          <option>Postal</option>
+			          <option>Medical</option>
+			          <option>Banking</option>
+			          <option>Travel</option>
+			          <option>E-Commerce</option>
+			          <option>Insurance</option>
+			          <option>Real Estate</option>
+			          <option>Home appliance </option>
+			          <option>LPG/Petrol</option>
+			          <option>Goverment</option>
+			          <option>Automobile</option>
+			          <option>Food safety</option>
+			          <option>Mpbile/Laptop</option>
+			          <option>Education</option>
+			          <option>Internet Service Provider</option>
+			          <option>D2H</option>
+			          <option>Job/Emploment</option>
+			          <option>Electricity</option>
+			          <option>Telecom</option>
+			          
+			          
+			      <!--<div class="valid-feedback">Valid.</div>
+			      <div class="invalid-feedback">Please fill out this field.</div>-->
+			      </select>
+			    </div>
+			    <!--<div class="form-group">
 			      <label for="cata"><b>Catagory</b></label>
 			      <input type="text" class="form-control" id="cata" name="cata" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
-			    </div>
-			    <div class="form-group">
+			    </div>-->
+			    <!--<div class="form-group">
 			      <label for="Payment"><b>Purchase Amount</b></label>
 			      <input type="text" class="form-control" id="Payment" name="Payment" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
-			    </div>
+			    </div>-->
 			    <!--div class="form-group">
 			      <label for="Attachment"><b>Attachment<span>*</span></b></label>
 			      <input type="file" class="form-control" placeholder="Photo/Document" id="Attachment" name="Attachment" required>
@@ -288,24 +357,25 @@
 
 <!-- Footer -->
 <div id="footer" class="container-fluid">
-  <div class="container ft1">
-      <div class="row">
+	<div class="container ft1">
+  		<div class="row">
           <div class="col">
           <ul>
           <label class="text-color"><b><i>LEGALUTION.IN</i></b></label>
-          <li><a href="#">About Legalution</a></li>
+          <li><a href="about.html">About Legalution</a></li>
           <li><a href="#">Join Us</a></li>
-          <li><a href="#">Online Payment</a></li>
+          <li><a href="#">Career</a></li>
           <li><a href="#">Contact Us</a></li>
           </ul>
           </div>
           <div class="col">
           <ul>
           <label class="text-color"><b><i>PLATFORM</i></b></label>
-          <li><a href="#">Digital Signature Certificate</a></li>
-          <li><a href="#">RTI Application Online</a></li>
-          <li><a href="#">Cosumer Complain</a></li>
-          <li><a href="#">Legal Drafting</a></li>
+          <li><a href="dsc.html">Digital Signature Certificate</a></li>
+          <li><a href="rti.html">RTI Application Online</a></li>
+          <li><a href="concom.html">Cosumer Complain</a></li>
+          <li><a href="gst.html">GST Registration</a></li>
+          <li><a href="msme.html">MSME Registration</a></li>
           </ul>
           </div>
           <div class="col">
@@ -320,13 +390,13 @@
           <div class="col">
           <ul>
           <label class="text-color" style="opacity:0;"><b><i>USAGE</i></b></label>
-          <li><a href="#">Confidentiality Policy</a></li>
+          <!--<li><a href="#">Confidentiality Policy</a></li>-->
           <li><a href="#">Disclaimer Policy</a></li>
-          <li><a href="#">Legalution Review</a></li>
+          <li><a href="http://legalution.in/#clsay">Legalution Review</a></li>
           </ul>
           </div>
         </div>
-    </div>
+  	</div>
   </div>
    <div class="sub_footer">
     <div class="container">
@@ -339,7 +409,7 @@
         </div>
         <div class="col-sm-6">
            <div class="copyright">
-               <i>Copyright@2019 legalition.in | All Right Reserved</i>
+               <i>Copyright 2020 legalution.in [All Right Reserved]</i>
            </div>
            <div class="clearfix"></div>
         </div>

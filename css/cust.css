@@ -314,6 +314,14 @@ blockquote h3:after {
     font-family: 'Georgia'; 
 }
 /************re-edit***********/
+.red_mor{
+    color: #fff;
+    text-decoration: none;
+}
+.red_mor:hover{
+    color: #fff;
+    text-decoration: none;
+}
 
 .image-holder-banner {
 
@@ -340,7 +348,7 @@ blockquote h3:after {
 .car_text h1{
    color: #3094ff;
    font-weight: 400;
-   font-size: 43px;
+   font-size: 37px;
 }
 .car_text h5{
     color: #333;
@@ -1073,20 +1081,30 @@ padding: 40px 0px;
    color: #333 !important;
    border: 1px solid #fff;
 }
+.bg-steel .card-body:hover .bg_clr .btn1 a{
+   color: #333 !important;
+}
+.bg-steel .card-body:hover .bg_clr h6{
+   color: #fff !important;
+}
+.bg-steel .card-body h6{
+    padding-top:20px;
+    text-align:center;
+}
 .bg-steel .card-body ul{
     color: #333;
     margin-left: 0px; 
     list-style: none;
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 0;
+    margin-bottom: 20px;
 }
 .bg-steel .card-body ul li{
   
   font-size: 15px;
 }
 .basic_bacground{
-    border-radius: 96px;
+    border-radius: 100%;
     background-image: linear-gradient(to top,#0026c7, #0b66ed);
     margin: 0 auto;
     padding: 34px 10px;
@@ -1388,6 +1406,7 @@ padding: 10px;
 
 .box-shadow-two table tr td {
   padding: 15px;
+  border-right:1px solid #444;
 }
 
 
@@ -1436,6 +1455,7 @@ padding: 10px;
 }
 #owl-two .client_text h5{
   color:#9e9a9a;
+  font-size: 12px;
 }
 
 .concom-text {

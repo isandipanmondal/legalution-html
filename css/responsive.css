@@ -31,6 +31,21 @@
 
 
 @media only screen and (max-width: 1024px){
+    .gst-holder{
+        left:346px;
+    }
+    .msme-banner{
+        left:358px;
+    }
+    .msme-banner h1{
+        font-size:18px;
+    }
+    .gst-holder {
+    right: 29px;
+}
+    .gst-holder h1{
+        font-size:18px;
+    }
 .carousel-inner img {
     width: 100%;
 }
@@ -124,6 +139,10 @@ margin-right: 152px;
 .bg-steel .card-body {
     padding: 0 10px;
 }
+.basic_bacground {
+    border-radius: 100%;
+    padding: 28px 10px;
+}
 }
 @media only screen and (max-width: 991px){
 #topmenu li a {
@@ -184,7 +203,7 @@ margin-right: 152px;
     left: 261px;
 }
   .car_text h1 {
-    font-size: 22px;
+    font-size: 20px;
 }
 .car_text h5 {
     font-size: 11px;
@@ -218,7 +237,7 @@ margin-right: 152px;
     margin-right: 126px;
 }
   .basic_bacground {
-    width: 17%;
+    width: 16%;
 }
 .basic_bacground h4 {
     font-size: 34px;
@@ -1362,7 +1381,7 @@ font-size: 20px;
     /* height: 50%; */
 }
 .basic_bacground {
-    width: 32%;
+    width: 30%;
 }
 .whatapps {
     margin-top: -38px;
@@ -1395,6 +1414,9 @@ font-size: 20px;
     display: none;
     position: relative;
     width: 116px;
+}
+ .basic_bacground {
+    width: 30%;
 }
 }
 
