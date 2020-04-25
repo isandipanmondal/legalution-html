@@ -6,6 +6,18 @@
     position: relative;
     width: 300px;
 }
+
+.gst-holder {
+    top: 70px;
+    right: 74px;
+    width: 400px;
+}
+
+.msme-banner {
+    top: 70px;
+    right: 3px;
+    width: 400px;
+}
 }
 @media only screen and (max-width: 1599px) and (min-width: 1200px) {
 .sear-main-box {

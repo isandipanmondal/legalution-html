@@ -13,7 +13,7 @@
   <script src="js/popper.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src='lib/a076d05399.js'></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
   <style>
   .fakeimg {
     height: 200px;
@@ -91,9 +91,9 @@
         </div>
        </div>
   </div>
+
   
 </div>
-
 <div class="outer-wrapper-logo">
 
   <div class="container">
@@ -159,127 +159,110 @@
   
 </nav>
 
-<!-- Banner & Heading -->
+<!-- Form -->
 
-
-<div id="banner">
-  <div class="p-4 text-center"><h2>Buy Digital Signature Certificate Right Way</h2></div>
+<div class="container">
+    <div class="your_trusted"><h3><b>Feedback</b></h3>
+     <!--<small class="text-center">"Thanks Legalution team, because of your support I was able to reach concern persons to resolve my dispute case with multiple stakeholders."<br>
+    - Kushal Prahladbhai Prajapati</small>-->
   </div>
-  <div class="pad_top-botm">
-  <h2 class="text-center buy_digital">Buy Digital Signature Today and Get Delivery Your Door Step<br>With in 3 Days at Any Where in India   <h2>
-</div>
-  <div class="pad_top-botm">
-    <img src="images/dsc_banner.jpg" style="width:100%" >
   </div>
-
 
 <!-- form1 -->
 
-<div class="container from_width">
-
-		  <img src="images/dsc_form_image.jpg" style="width:100%;" >
-
-			<div style="border:1px solid #cdcdcd; padding:0px 30px 30px 30px">
-			<div class="text-center font_size-2">Your Details> Shipping> Payment></div>
-      <span id="dsc_summery"></span>
-      <form action="backend.php?func=dsc_payment" class="needs-validation" id="dsc_form_2" method="post">
-        <input type="hidden" name="all_form_value" id="all_form_value">
+<div class="container my-5">
+<div class="row">
+		
+		<div class="col-md-6 col-sm-12 col-12">
+      <div class="file_complaints">
+			<h3>Feedback Form</h3>
+			
+        <br>
+        <form action="backend.php" class="needs-validation" id="complainFrm2" method="post" enctype="multipart/form-data">
 			    <div class="form-group">
-			      <label for="address"><b>Address</b></label>
-			      <textarea class="form-control" id="address" name="address" rows="8"></textarea>
+			      <label for="doc"><b>Name<span>*</span></b></label>
+			      <input type="text" class="form-control" id="name" name="name" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
-
-			     <div class="form-group">
-			      <label for="state"><b>State</b></label>
-			      <select type="text" class="form-control" id="state" name="state" required>
-            <option>Andhra Pradesh</option>
-            <option>Arunachal Pradesh</option>
-            <option>Assam</option>
-            <option>Bihar</option>
-            <option>Chhattisgarh</option>
-            <option>Goa</option>
-            <option>Gujarat</option>
-            <option>Haryana</option>
-            <option>Himachal Pradesh</option>
-            <option>Jharkhand</option>
-            <option>Karnataka</option>
-            <option>Kerala</option>
-            <option>Madhya Pradesh</option>
-            <option>Maharashtra</option>
-            <option>Manipur</option>
-            <option>Meghalaya</option>
-            <option>Mizoram</option>
-            <option>Nagaland</option>
-            <option>Odisha</option>
-            <option>Punjab</option>
-            <option>Rajasthan</option>
-            <option>Sikkim</option>
-            <option>Tamil Nadu</option>
-            <option>Telangana</option>
-            <option>Tripura</option>
-            <option>Uttar Pradesh</option>
-            <option>Uttarakhand</option>
-            <option>West Bengal</option>
-            <option>Andaman and Nicobar Islands</option>
-            <option>Chandigarh</option>
-            <option>Dadar and Nagar Haveli</option>
-            <option>Daman and Diu</option>
-            <option>Delhi</option>
-            <option>Lakshadweep</option>
-            <option>Puducherry (Pondicherry)</option>
-            <option>Jammu</option>
-            <option>Kashmir</option>
-            <option>Ladakh</option>
-
-            </select>
-			      <div class="valid-feedback">Valid.</div>
-			      <div class="invalid-feedback">Please fill out this field.</div>
-			    </div>
-
-
-			    <div>
-			    	<div class="row">
-			    		<div class="col-sm-6">
-			    			<div class="form-group">
-						      <label for="city"><b>City/Village</b></label>
-						      <input type="text" class="form-control" id="city" name="city" required>
-						      <div class="valid-feedback">Valid.</div>
-						      <div class="invalid-feedback">Please fill out this field.</div>
-						    </div>
-			    		</div>
-
-			    		<div class="col-sm-6">
-			    			<div class="form-group" >
-						      <label for="pincode"><b>Postal Code</b></label>
-						      <input type="text" class="form-control" id="pincode" name="pincode" required>
-						      <div class="valid-feedback">Valid.</div>
-						      <div class="invalid-feedback">Please fill out this field.</div>
-						    </div>
-			    		</div>
-
-			    	</div>
-			    </div>
-
-
 			    <div class="form-group">
-			      <label for="country"><b>Country</b></label>
-			      <input type="text" class="form-control" id="country" name="country" value="India" required>
+			      <label for="doc"><b>mobile No.<span>*</span></b></label>
+			      <input type="text" class="form-control" id="mobile-no" name="mobile-no" required>
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
-			   
-			        
-			    <div class="text-center you_pay"><h4>Total Amount Rs. 699.00/-</h4></div>
-			   
-			    <div class="text-center"><button type="Next" class="btn1 btn_width">Next</button></div>
+			    <div class="form-group">
+			      <label for="doc"><b>Email id<span>*</span></b></label>
+			      <input type="text" class="form-control" id="email" name="email" required>
+			      <div class="valid-feedback">Valid.</div>
+			      <div class="invalid-feedback">Please fill out this field.</div>
+			    </div>
+			    <div class="form-group">
+			      <label for="doc"><b>Subject<span>*</span></b></label>
+			      <input type="text" class="form-control" id="subject" name="subject" required>
+			      <div class="valid-feedback">Valid.</div>
+			      <div class="invalid-feedback">Please fill out this field.</div>
+			    </div>
+			    <div class="form-group">
+			      <label for="doc"><b>Message<span>*</span></b></label>
+			      <textarea class="form-control" id="message" name="message" rows="8"></textarea>
+			      <!--<input type="text" class="form-control" id="doc" name="doc" required>
+			      <div class="valid-feedback">Valid.</div>
+			      <div class="invalid-feedback">Please fill out this field.</div>-->
+			    </div>
+			    
+			     
+          <div class="text-center"><button class="btn1 btn_width" type="submit">Submit</button></div>
 			    </form>
 
 			</div>
 		</div>
 
+			<div class="col-md-6 col-sm-12 col-12">
+     <!--   <div>
+          <table id=tbl>
+            <tr>
+            <td class="border_none"><b>Consumer Protection <br>Act 1986</b></td>
+            <td class="border_none"></td>
+            <td class="border_none"><b>Consumer Protection <br>Act 2019</b></td>
+            </tr>
+            <tr>
+            <td><small>No Separate Regulator</small></td>
+            <td><div class="blt11">Regulator</div></td>
+            <td><small>Central Consumer Protection Authority(CCPA) formed</small></td>
+            </tr>
+            <tr>
+            <td><small>Complaint could be filed in a consumer court where the seller's(defendent) office is located.</small></td>
+            <td><div class="blt11">Consumer Court</div></td>
+            <td><small>Complaint could be filed in a consumer court where the complain resides or works</small></td>
+            </tr>
+            <tr>
+            <td><small>No Provision. Consumer could approach a civil court but not consumer court.</small></td>
+            <td><div class="blt11">Product Liability</div></td>
+            <td><small>Consumer can seek compensation for harm caused by a product or service</small></td>
+            </tr>
+            <tr>
+            <td><small>District: up to Rs.20 lakh Sate: Rs.20 lakh to Rs.1 Cr. National: Rs. above Rs.1 Cr.</small></td>
+            <td><div class="blt11">Pecuniary jurisdiction</div></td>
+            <td><small>District: up to Rs. 1 Cr. Sate: Rs. 1 Cr. to Rs. 10 Cr. National : Rs. above Rs. 10 Cr</small></td>
+            </tr>
+            <tr>
+            <td><small>No Provision</small></td>
+            <td><div class="blt11">E-Commerce</div></td>
+            <td><small>All rules of direct selling extended to e-commerce</small></td>
+            </tr>
+            <tr>
+            <td><small>No legal provision</small></td>
+            <td><div class="blt11">Mediation Calls</div></td>
+            <td><small>Court can refer settlement through mediation</small></td>
+            </tr>
+          </table>
+        </div>-->
+        
+      </div>
 
+</div>
+</div>
 
 <!-- Footer -->
 <div id="footer" class="container-fluid">
@@ -339,6 +322,7 @@
            </div>
            <div class="clearfix"></div>
         </div>
+
         <div class="col-sm-12">
           <hr>
           <div class="t-s">
@@ -353,6 +337,8 @@
     </div>
 </div>
 </div>
+
+
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -396,16 +382,6 @@ $(document).ready(function(){
 <!--development section-->
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/dev_mrin.js"></script>
-<script>
-  //now get all the value from the brouser memory 
-  let dsc_frm_key_value = getSavedData('dsc_frm_key_value');
-  if(dsc_frm_key_value.hasOwnProperty('clt')){
-    let str = dsc_frm_key_value.clt+' '+dsc_frm_key_value.ust+' '+dsc_frm_key_value.crt+' '+dsc_frm_key_value.ufor;
-    str+= ' validity '+dsc_frm_key_value.vld;
-    $("#dsc_summery").html(str);
-    $(".you_pay h4").html("Total Amount Rs. "+dsc_frm_key_value.amount+'/-');
-  }
-</script>
 <!--end :: development-->
 </body>
 </html>
