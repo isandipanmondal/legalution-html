@@ -585,6 +585,52 @@ $(document).ready(function(){
     });
     //END RTI 
     
+    //FEEDBACK SECTION
+    $("#feedback").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            mobileno:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            email:{
+                required:true,
+                email:true,
+            },
+            subject:{
+                required:true,
+                maxlength:200,
+            },
+            message:{
+                required:true,
+                maxlength:200,
+            },
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            // maild basic details of the user who filled the form
+            let frmdata = $(form).serializeArray();
+            let feedback_form_key_value={};
+            $.each(frmdata,function(i,item){
+                feedback_form_key_value[item.name] = item.value;
+            });
+            let path = "backend.php?func=feedback";
+            doAjaxCall(path,feedback_form_key_value,function(response){
+                if(!response.error){
+                    form.reset();
+                }
+                alert(response.msg);
+            });
+        }
+    });
+    // END FEEDBACK
 });
 
 //basepath retrive

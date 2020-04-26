@@ -402,6 +402,22 @@ function gst_category_payment($data){
     return_response($status,$msg,$resdata);
 }
 
+// feedback section
+function feedback($data){
+    common_print($data);
+    $subject="Feedback from customer";
+    $message = "Hi,\nCustomer give a feedback details are as follows\n";
+    $message .="\nCustomer Name : ".$data['name'];
+    $message .="\nCustomer Phone : ".$data['mobileno'];
+    $message .="\nCustomer Email : ".$data['email'];
+    $message .="\nSubject : ".$data['subject'];
+    $message .="\nMessage : ".$data['message'];
+    $headers = mail_headers();
+    mail(recieverEmail,$subject,$message,$headers);
+    $msg='Thank you, Your feedback is valuable for us';
+    return_response($status=1,$msg,$data=array());
+}
+
 $functionName = (isset($_GET['func']))?$_GET['func']:'';
 if(!empty($functionName)){
     if(function_exists($functionName)){
