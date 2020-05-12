@@ -148,7 +148,7 @@ function multi_attach_mail($to, $subject, $message, $files = array(),$isFormFile
 function rti_basic_info($data){
     common_print($data);
     //create random a Registration ID 
-    $registration_id = "LTRTI-".date("Y")."/".rand(9999,10000);
+    $registration_id = "LTRTI-".date("Y")."/".rand(9999,1000000);
     $subject="Basic details of RTI application";
     $message = "Hi,\nCustomer fill RTI allication, details are as follows\n";
     $message .="\nApplicant Name : ".$data['name'];
@@ -297,7 +297,7 @@ function gst_payment($data){
 function gst_payment_request($data){
     common_print($data);
     //create random a Registration ID 
-    $registration_id = "LTGST-".date("Y")."/".rand(9999,10000);
+    $registration_id = "LTGST-".date("Y")."/".rand(9999,1000000);
     $maildata = $data;
     $subject="Customer Filling GST Registration Form";
     $message = "Hi,\nGST Registration form details are as follows\n";
@@ -338,7 +338,7 @@ function gst_payment_request($data){
 function uar_basic_info($data){
     common_print($data);
     //create random a Registration ID 
-    $registration_id = "LTRTI-".date("Y")."/".rand(9999,10000);
+    $registration_id = "LTRTI-".date("Y")."/".rand(9999,1000000);
     $maildata = $data;
     $subject="Customer Filling Udyog Aadhaar Registration Form";
     $message = "Hi,\nUdyog Aadhaar Registration form details are as follows\n";
