@@ -255,10 +255,90 @@ function gst_application($data){
     $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
     header("Location:$payment_request_url");
 }
+
+function gst_payment($data){
+    common_print($data);
+    $payment_request_url="index.html";
+    $data = $_POST;
+    if(isset($data['registration_id']) && !empty($data['registration_id'])){
+        $gst_charge = (!empty($data['price_range']))?$data['registration_id']:0;
+        $name = (!empty($data['name']))?$data['name']:'';
+        $email = (!empty($data['email']))?$data['email']:'';
+        $phone = (!empty($data['phone']))?$data['phone']:'';
+
+        $apply_gst_charge=0;
+        
+        if($gst_charge==2){
+            $apply_gst_charge ='3999';
+            $subject="GST STANDARD Plan.";
+        }
+        elseif($gst_charge==3){
+            $apply_gst_charge ='7899';
+            $subject="GST PREMIUM Plan.";
+        }
+        else{
+            $apply_gst_charge ='1699';
+            $subject="GST BASIC Plan.";
+        }
+        $subject .=" Application ID ".$data['registration_id'];
+        if($apply_gst_charge>0){
+            $amout=$apply_gst_charge;
+            $purpose=$subject;
+            $buyer_name = $name;
+            $phone = $phone;
+            $email = $email;
+            $pay_for=3;
+            $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
+        }
+    }
+    header("Location:$payment_request_url");
+}
+
+function gst_payment_request($data){
+    common_print($data);
+    //create random a Registration ID 
+    $registration_id = "LTGST-".date("Y")."/".rand(9999,10000);
+    $maildata = $data;
+    $subject="Customer Filling GST Registration Form";
+    $message = "Hi,\nGST Registration form details are as follows\n";
+    $message .="\nName : ".$maildata['name'];
+    $message .="\nPhone : ".$maildata['phone'];
+    $message .="\nEmail : ".$maildata['email'];
+    $message .="\nAddress : ".$maildata['address'];
+    $message .="\nState : ".$maildata['state'];
+    $message .="\nPIN : ".$maildata['pin_code'];
+    $message .="\nCompany Name : ".$maildata['company_name'];
+    $message .="\nGST No. : ".$maildata['gst_no'];
+    
+    $message .="\n\Registration Id : ".$registration_id;
+
+    $gst_charge = (!empty($maildata['price_range']))?$maildata['registration_id']:0;
+    $apply_gst_charge=0;
+    if($gst_charge==2){
+        $apply_gst_charge ='3999';
+        $message .="\nGST Scheme : STANDARD 6 month GST return filing with GST registration (INR ".$apply_gst_charge.")";
+    }
+    elseif($gst_charge==3){
+        $apply_gst_charge ='7899';
+        $message .="\nGST Scheme : PREMIUM 12 month GST return filing with GST registration (INR ".$apply_gst_charge.")";
+    }
+    else{
+        $apply_gst_charge ='1699';
+        $message .="\nGST Scheme : BASIC 3 month GST return filing (INR ".$apply_gst_charge.")";
+    }
+
+    //mail function of the server default called for send the mail with sunject 
+    $headers = mail_headers();
+    mail(recieverEmail,$subject,$message,$headers);
+    $msg='Thanks you, we will contact with you very soon.';
+    return_response($status=1,$msg,array('registration_id'=>$registration_id));
+}
 // end GST
 //udyog adhar registration section 
 function uar_basic_info($data){
     common_print($data);
+    //create random a Registration ID 
+    $registration_id = "LTRTI-".date("Y")."/".rand(9999,10000);
     $maildata = $data;
     $subject="Customer Filling Udyog Aadhaar Registration Form";
     $message = "Hi,\nUdyog Aadhaar Registration form details are as follows\n";
@@ -274,13 +354,34 @@ function uar_basic_info($data){
     $message .="\nPAN : ".$maildata['PAN'];
     $message .="\nBank A/C : ".$maildata['acno'];
     $message .="\nBank IFSC Code : ".$maildata['IFSCCode'];
-    
+    $message .="\n\Registration Id : ".$registration_id;
     //mail function of the server default called for send the mail with sunject 
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
     $msg='Thanks you, we will contact with you very soon.';
-    return_response($status=1,$msg,$data=array());
+    return_response($status=1,$msg,array('registration_id'=>$registration_id));
 
+}
+//payment section
+function msme_payment_request($data){
+    common_print($data);
+    $res_data=array();
+    $msg="";
+    $total_payment='354';
+    $subject="MSME Application ID ".$data['registration_id'];
+    
+    //apply 18% chrge 
+    //$total_payment  = $total_payment + ceil(($total_payment*18)/100);
+    //now make payment for this application
+    $amout=$total_payment;
+    $purpose=$subject;
+    $buyer_name = $data['name'];
+    $phone = $data['mobileno'];
+    $email = $data['Email'];
+    $pay_for=5;
+    $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
+    $res_data['url']=$payment_request_url;
+    return_response($status=1,$msg,$res_data);
 }
 // end uar
 // digital signature certificate
@@ -491,7 +592,10 @@ function get_payment_link($amount=0, $purpose="",$buyer_name="",$phone="",$email
         else{
             $phone="";
         }
-
+        //validate the email 
+        if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
+            $email="";
+        }
         //gate way config
 		$payload = Array(
 			'purpose' => $purpose,

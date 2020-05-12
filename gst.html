@@ -711,7 +711,7 @@ $(document).ready(function(){
 		$("button.btn1").click(function(e){
 			let payment_id = $(this).data("payment_id");
 			if(payment_id>0){
-        if(confirm("Are you sure, you want to buy")){
+        /*if(confirm("Are you sure, you want to buy")){
           let data={payment_id:payment_id};
           let path = "backend.php?func=gst_category_payment";
           doAjaxCall(path,data,function(response){
@@ -723,7 +723,7 @@ $(document).ready(function(){
               alert(response.msg);
             }
           });
-        }
+        }*/
 			}
 		});
 	});

@@ -194,7 +194,7 @@
 
     <br>  
  
- 	<div class=""><button class="btn1 btn_width" id="rti_payment" >Pay Now</button></div>
+ 	<div class=""><button class="btn1 btn_width" id="msme_payment" >Pay Now</button></div>
  </div>
 </div>
 </div>
@@ -325,13 +325,13 @@ $(document).ready(function(){
 </script>
 <!--development section-->
 <script src="js/jquery.validate.min.js"></script>
-<script src="js/dev_mrin.js?ss"></script>
+<script src="js/dev_mrin.js"></script>
 <script>
   $(document).ready(function(){
-    let rti_form_key_value = getSavedData('rti_form_key_value');
-    console.log(rti_form_key_value);
-    if(rti_form_key_value.hasOwnProperty('registration_id')){
-      $("#registration_id span").html(rti_form_key_value.registration_id);
+    let uar_form_key_value = getSavedData('uar_form_key_value');
+    console.log(uar_form_key_value);
+    if(uar_form_key_value.hasOwnProperty('registration_id')){
+      $("#registration_id span").html(uar_form_key_value.registration_id);
     }
   });
 </script>

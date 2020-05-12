@@ -418,6 +418,67 @@ $(document).ready(function(){
         errorClass:"text-danger",
         validCalss:"text-success",
     });
+    // gst payment package request
+    $("#gst_payment_request").validate({
+        rules:{
+            name:{
+                required:true,
+                maxlength:100,
+            },
+            phone:{
+                required:true,
+                digits:true,
+                minlength:10,
+                maxlength:10,
+            },
+            email:{
+                required:true,
+                email:true,
+            },
+            /*price_range:{
+                required:true
+            }*/
+        },
+        errorElement:"em",
+        errorClass:"text-danger",
+        validCalss:"text-success",
+        submitHandler:function(form){
+            // maild basic details of the user who filled the data
+            let frmdata = $(form).serializeArray();
+            //now save all the form data into the storage 
+            let gst_payment_form_key_value={};
+            $.each(frmdata,function(i,item){
+                gst_payment_form_key_value[item.name] = item.value;
+            });
+            if(!gst_payment_form_key_value.hasOwnProperty('price_range')){
+                alert("Please choose a plan");
+            }
+            else{
+                let val = gst_payment_form_key_value.price_range;
+                let alt_msg="You choosed ";
+                if(val==3){
+                    alt_msg +=" PREMIUM Plan.";
+                }
+                else if(val==2){
+                    alt_msg +=" STANDARD Plan.";
+                }
+                else{
+                    alt_msg +=" BASIC Plan.";
+                }
+                if(confirm(alt_msg)){
+                    //how send send email about this complain
+                    let path = "backend.php?func=gst_payment_request";
+                    doAjaxCall(path,gst_payment_form_key_value,function(response){
+                        console.log(response);
+                        if(!response.error){
+                            $("#registration_id").val(response.full_res.registration_id);
+                            form.submit();
+                        }
+                    });
+                }
+            }
+        }
+    });
 
     //udyog aadhar registration
     $("#uar_form").validate({
@@ -436,7 +497,7 @@ $(document).ready(function(){
                 required:true,
                 email:true,
             },
-            aadhaar:{
+            /*aadhaar:{
                 required:true,
                 digits:true,
                 minlength:16,
@@ -465,7 +526,7 @@ $(document).ready(function(){
             businessactivity:{
                 required:true,
                 maxlength:200,
-            }
+            }*/
         },
         errorElement:"em",
         errorClass:"text-danger",
@@ -478,18 +539,30 @@ $(document).ready(function(){
                 uar_form_key_value[item.name] = item.value;
             });
             cleareData('uar_form_key_value');
-            doSaveData('uar_form_key_value',uar_form_key_value);
             //how send send email about this complain
             let path = "backend.php?func=uar_basic_info";
             doAjaxCall(path,uar_form_key_value,function(response){
                 console.log(response);
-                if(response.msg.length>0){
-                    alert(response.msg);
+                if(!response.error){
+                    uar_form_key_value['registration_id']=response.full_res.registration_id;
+                    doSaveData('uar_form_key_value',uar_form_key_value);
+                    form.submit();
                 }
-                //form.reset();
-                //form.submit();
             });
         }
+    });
+    // rti payment section 
+    $("#msme_payment").bind("click",function(e){
+        e.preventDefault();
+        let uar_form_key_value = getSavedData('uar_form_key_value');
+        //now call for pyment response 
+        let path = "backend.php?func=msme_payment_request";
+        doAjaxCall(path,uar_form_key_value,function(response){
+            if(!response.error){
+                //need to redirect to the payment url
+                window.location=response.full_res.url;//get the payment url redirection
+            }
+        });
     });
     //END :: REGISTRATION AND FILLING 
 
