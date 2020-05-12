@@ -261,7 +261,7 @@ function gst_payment($data){
     $payment_request_url="index.html";
     $data = $_POST;
     if(isset($data['registration_id']) && !empty($data['registration_id'])){
-        $gst_charge = (!empty($data['price_range']))?$data['registration_id']:0;
+        $gst_charge = (!empty($data['price_range']))?$data['price_range']:0;
         $name = (!empty($data['name']))?$data['name']:'';
         $email = (!empty($data['email']))?$data['email']:'';
         $phone = (!empty($data['phone']))?$data['phone']:'';
