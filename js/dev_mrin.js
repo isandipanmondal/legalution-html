@@ -223,18 +223,18 @@ $(document).ready(function(){
     $("#dsc_form_2").validate({
         rules:{
             address:{
-                required:true,
+                //required:true,
                 maxlength:200,
             },
             state:{
-                required:true,
+                //required:true,
             },
             city:{
-                required:true,
+                //required:true,
                 maxlength:100,
             },
             pincode:{
-                required:true,
+                //required:true,
                 digits:true,
                 minlength:6,
                 maxlength:6,
@@ -287,23 +287,23 @@ $(document).ready(function(){
                 email:true,
             },
             Address:{
-                required:true,
+                //required:true,
                 maxlength:200,
             },
             cacn:{
-                required:true,
+                //required:true,
                 maxlength:100,
             },
             comsub:{
-                required:true,
+                //required:true,
                 maxlength:150,
             },
             cata:{
-                required:true,
+                //required:true,
                 maxlength:150,
             },
             Payment:{
-                required:true,
+                //required:true,
                 number:true,
                 maxlength:8,
             }

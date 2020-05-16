@@ -150,7 +150,7 @@
             <table>
             <tr><td><label>Usage type:</label></td><td colspan="3">
             	<select id="ufor" name="ufor" class="ufor" style="border-radius:5px; border:1px solid #0e72c8">
-            		<option selected="true" disabled="disabled" class="bg-secondary">Choose Type</option>
+            		
             		<option>For Multiple Purpose</option>
             		<option>For GST</option>
             		<option>For MCA(ROC)</option>
@@ -668,7 +668,7 @@ Legalution.in includes services, provided PAN INDIA basis. It involves process f
 <script type="text/javascript">
 	function tick(){
 		/*----*/
-		if($("#signtype").text()=="ENCRYPTED" || $("#signtype").text()=="SIGNATURE")
+		/*if($("#signtype").text()=="ENCRYPTED" || $("#signtype").text()=="SIGNATURE")
 		{
 			if($("#yr").text()=="1 YEAR")
 			  {
@@ -683,7 +683,7 @@ Legalution.in includes services, provided PAN INDIA basis. It involves process f
 					}
 				}
 			}
-		}
+		}*/
 	}
 </script>
 <script type="text/javascript">
@@ -714,12 +714,26 @@ $(document).ready(function(){
 <script src="js/jquery.validate.min.js"></script>
 <script src="js/dev_mrin.js?hj"></script>
 <script type="text/javascript">
+	var certificate_prices={};
 	$(document).ready(function(){
+		let path = "backend.php?func=get_certificate_prices";
+		doAjaxCall(path,{},function(response){
+			if(!response.error){
+				certificate_prices = response.full_res.certificate_prices;
+				show_certificate_value();
+			}
+		});
+
 		$("button.btn2").click(function(e){
 			let payment_id = $(this).data("payment_id");
 			if(payment_id>0){
-				if(confirm("Are you sure, you want to buy")){
+				let prnt = $(this).parents('.card');
+				let headtitle = $(prnt).children('.card-header').html();
+				let cetName = $($(prnt).children('.card-body')).find('div small').html();
+				let namePlan = headtitle+" "+cetName;
+				if(confirm("Are you sure, you want to buy "+namePlan)){
 					let data={payment_id:payment_id};
+					/*
 					let path = "backend.php?func=dci_category_payment";
 					doAjaxCall(path,data,function(response){
 						console.log(response);
@@ -730,10 +744,71 @@ $(document).ready(function(){
 							alert(response.msg);
 						}
 					});
+					*/
+					let path = "backend.php?func=get_category_payment_amount";
+					doAjaxCall(path,data,function(response){
+						if(!response.error){
+							let payment_amount=response.full_res.payment_amount;
+							let dsc_frm_data = [
+								{name:'is_category_payment',value:'1'},
+								{name:'plane_name',value:namePlan},
+								{name:'payment_id',value:payment_id},
+								{name:'payment_amount',value:payment_amount},
+							];
+							let dsc_frm_key_value={};
+							$.each(dsc_frm_data,function(i,item){
+								dsc_frm_key_value[item.name] = item.value;
+							});
+							// cleare browser data
+							cleareData('dsc_frm_data');
+							cleareData('dsc_frm_key_value');
+
+							//saving the form values
+							doSaveData('dsc_frm_data',dsc_frm_data);
+							doSaveData('dsc_frm_key_value',dsc_frm_key_value);
+							//now redirect to the page
+							window.location=response.full_res.url;
+						}
+						else{
+							alert(response.msg);
+						}
+					});
 				}
 			}
 		});
+
+		//certicate price sections
+		$("#ufor").bind('change',function(e){
+			show_certificate_value();
+		});
+		$("input[name='vld']").click(function(){
+			show_certificate_value();
+		});
+		$("input[name='crt']").click(function(){
+			show_certificate_value();
+		});
 	});
+	
+	function show_certificate_value(){
+		let certFor = $("#ufor").val();
+		let certYear = $("input[name='vld']:checked").val();
+		let certType = $("input[name='crt']:checked").val();
+		let keyStr = $.trim(certFor+"_"+certYear+"_"+certType);
+		keyStr = keyStr.replace(/[ \t\(\-]/g, '_');
+		keyStr = keyStr.replace(/[ \)]/g, '');
+		//now convert all the in lowar case 
+		keyStr = keyStr.toLowerCase();
+		let price="";
+		if(certificate_prices.hasOwnProperty(keyStr)){
+			price = certificate_prices[keyStr];
+		}
+		$("#amount").val(price);
+		//set the ptice in view 
+		if(price.length > 0 ){
+			price = "Rs."+price+"/-";
+		}
+		$("#pr").html(price);
+	}
 </script>
 <!--end :: development-->
 </body>

@@ -390,7 +390,15 @@ function customer_dsc_enquery($data){
     $get_params = $_GET;
     $subject="Digital signature certificate enquiry";
     $message = "Hi,\nCustomer looking for digital signature certificate, details are as follows\n";
-    $message .=$_GET['clt'].", ".$_GET['crt']." - ".$_GET['ust'].", ".$_GET['ufor']." with ".$_GET['vld']." validity.";
+    if(isset($_GET['is_category_payment']) && $_GET['is_category_payment']=='1'){
+        $message .=$_GET['plane_name'];
+    }
+    else{
+        if(isset($_GET['clt'])){
+            $message .=$_GET['clt'].", ".$_GET['crt']." - ".$_GET['ust'].", ".$_GET['ufor']." with ".$_GET['vld']." validity.";
+        }
+    }
+    
     $message .="\nCustomer Name : ".$data['name'];
     $message .="\nCustomer Phone : ".$data['phone'];
     $message .="\nCustomer Email : ".$data['email'];
@@ -408,34 +416,80 @@ function dsc_payment($data){
     //receive datas 
     $get_params = $_GET;
     $post_params = $_POST;
-
+    $purpose = "";
+    $paying_amount=0;
+    $status=1;
+    $message="";
     //now get all the posted value 
-    $all_form_value = $_POST['all_form_value'];
+    $all_form_value = isset($_POST['all_form_value'])?$_POST['all_form_value']:'';
     if(!empty($all_form_value)){
         $all_form_value = json_decode($all_form_value,true);
+    }
+    else{
+        $status=0;
+        $message="invalid access";
     }
     $name = isset($all_form_value['name'])?$all_form_value['name']:'';
     $email = isset($all_form_value['email'])?$all_form_value['email']:'';
     $phno = isset($all_form_value['phno'])?$all_form_value['phno']:'';
     $quantity = isset($all_form_value['quantity'])?$all_form_value['quantity']:'1';
-    $ufor = isset($all_form_value['ufor'])?$all_form_value['ufor']:'';
-    $clt = isset($all_form_value['clt'])?$all_form_value['clt']:'';
-    $ust = isset($all_form_value['ust'])?$all_form_value['ust']:'';
-    $vld = isset($all_form_value['vld'])?$all_form_value['vld']:'';
-    $crt = isset($all_form_value['crt'])?$all_form_value['crt']:'';
+    
+    if(isset($all_form_value['is_category_payment']) && $all_form_value['is_category_payment']=='1'){
+        $purpose = isset($all_form_value['plane_name'])?$all_form_value['plane_name']:'';
+        $payment_id = isset($all_form_value['payment_id'])?$all_form_value['payment_id']:'';
+        $payment_amount = isset($all_form_value['payment_amount'])?$all_form_value['payment_amount']:'';
+        //validate the payment id with payment price
+        $basic_amount = get_category_paying_amount($payment_id);
+        if($basic_amount == $payment_amount){
+            $paying_amount =  $basic_amount*$quantity;
+        }
+        else{
+            $status=0;
+            $message="Amount missmatched";
+        }
+    }
+    elseif(isset($all_form_value['ufor'])){
+        $ufor = isset($all_form_value['ufor'])?$all_form_value['ufor']:'';
+        $clt = isset($all_form_value['clt'])?$all_form_value['clt']:'';
+        $ust = isset($all_form_value['ust'])?$all_form_value['ust']:'';
+        $vld = isset($all_form_value['vld'])?$all_form_value['vld']:'';
+        $crt = isset($all_form_value['crt'])?$all_form_value['crt']:'';
+        $payment_amount = isset($all_form_value['amount'])?$all_form_value['amount']:'0';
+        $purpose=$clt.", ".$crt." - ".$ust.", ".$ufor." with ".$vld." validity.";
+        //validate the payment amount and the price 
+        $keyStr = trim($ufor)."_".trim($vld)."_".trim($crt);
+        //now replace all 
+        $keyStr = str_replace(array(" ","(","-"),"_",$keyStr);
+        $keyStr = str_replace(")","",$keyStr);
+        $keyStr = strtolower($keyStr);
+        $basic_amount = get_digital_certificate_prices($keyStr);
+        if($basic_amount == $payment_amount){
+            $paying_amount =  $basic_amount*$quantity;
+        }
+        else{
+            $status=0;
+            $message="Amount missmatched";
+        }
+    }
     
     //now need to go for payment gateway 
-    $paying_amount=699;//RS
-    $purpose .=
-    //now make payment for this application
-    $amout=$paying_amount;
-    $purpose=$clt.", ".$crt." - ".$ust.", ".$ufor." with ".$vld." validity.";;
-    $buyer_name = $name;
-    $phone = $phno;
-    $email = $email;
-    $pay_for=1;
-    $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
-    header("Location:$payment_request_url");
+    if($status){
+        //now make payment for this application
+        $amout=$paying_amount;
+        $buyer_name = $name;
+        $phone = $phno;
+        $email = $email;
+        $pay_for=1;
+        $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
+        header("Location:$payment_request_url");
+    }
+    else{
+        //go to error page 
+        die("Error :: ".$message);
+        //$baseurl = get_base_url();
+        //$payment_request_url = $baseurl."backend.php?func=payment_request_faild&errors=$message";
+       // header("Location:$payment_request_url");
+    }
 }
 
 //payment request for dsc category view card
@@ -461,6 +515,38 @@ function dci_category_payment($data){
         $status=1;
     }
     return_response($status,$msg,$resdata);
+}
+
+function get_category_payment_amount($data){
+    $payment_id = $data['payment_id'];
+    $status=0;
+    $url = get_base_url()."/dsc_form1.html";
+    $payment_amount = get_category_paying_amount($payment_id);
+    if($payment_amount>0){
+        $status=1;
+    }
+    return_response($status,$msg="amount of this category",['payment_amount'=>$payment_amount,'url'=>$url]);
+}
+//category id payment config
+function get_category_paying_amount($payment_id=0){
+    $category_payments=[
+        '1'=>'677',
+        '2'=>'799',
+        '3'=>'899',
+        '4'=>'677',
+        '5'=>'799',
+        '6'=>'899',
+        '7'=>'677',
+        '8'=>'799',
+        '9'=>'899',
+        '10'=>'677',
+        '11'=>'799',
+        '12'=>'899',
+        '13'=>'677',
+        '14'=>'799',
+        '15'=>'899',
+    ];
+    return (isset($category_payments[$payment_id]))?$category_payments[$payment_id]:0;
 }
 
 // payment request for gst category card
@@ -804,4 +890,78 @@ function call_curl($endpath="",$payload=array(),$mode="post"){
 	return json_decode($response,true);
 }
 
+//get digital signeture types
+function get_certificate_prices(){
+    $certificate_prices = get_digital_certificate_prices();
+    $msg="certificate price details";
+    return_response($status=1,$msg,['certificate_prices'=>$certificate_prices]);
+}
+
+function get_digital_certificate_prices($scheme_name=''){
+    $certificate=[
+        "for_multiple_purpose_1_year_signature"=>'100',
+        "for_multiple_purpose_1_year_encrypted"=>'100',
+        "for_multiple_purpose_1_year_both"=>'200',
+        "for_multiple_purpose_2_year_signature"=>'150',
+        "for_multiple_purpose_2_year_encrypted"=>'150',
+        "for_multiple_purpose_2_year_both"=>'300',
+
+        "for_gst_1_year_signature"=>'150',
+        "for_gst_1_year_encrypted"=>'150',
+        "for_gst_1_year_both"=>'300',
+        "for_gst_2_year_signature"=>'250',
+        "for_gst_2_year_encrypted"=>'250',
+        "for_gst_2_year_both"=>'500',
+        
+        "for_mca_roc_1_year_signature"=>'200',
+        "for_mca_roc_1_year_encrypted"=>'200',
+        "for_mca_roc_1_year_both"=>'400',
+        "for_mca_roc_2_year_signature"=>'300',
+        "for_mca_roc_2_year_encrypted"=>'300',
+        "for_mca_roc_2_year_both"=>'600',
+        
+        "for_epf_1_year_signature"=>'250',
+        "for_epf_1_year_encrypted"=>'250',
+        "for_epf_1_year_both"=>'350',
+        "for_epf_2_year_signature"=>'350',
+        "for_epf_2_year_encrypted"=>'350',
+        "for_epf_2_year_both"=>'650',
+        
+        "for_income_tax_1_year_signature"=>'400',
+        "for_income_tax_1_year_encrypted"=>'400',
+        "for_income_tax_1_year_both"=>'700',
+        "for_income_tax_2_year_signature"=>'450',
+        "for_income_tax_2_year_encrypted"=>'450',
+        "for_income_tax_2_year_both"=>'850',
+        
+        "for_e_tender_1_year_signature"=>'250',
+        "for_e_tender_1_year_encrypted"=>'250',
+        "for_e_tender_1_year_both"=>'450',
+        "for_e_tender_2_year_signature"=>'350',
+        "for_e_tender_2_year_encrypted"=>'350',
+        "for_e_tender_2_year_both"=>'650',
+         
+        "for_document_signer_1_year_signature"=>'150',
+        "for_document_signer_1_year_encrypted"=>'200',
+        "for_document_signer_1_year_both"=>'300',
+        "for_document_signer_2_year_signature"=>'200',
+        "for_document_signer_2_year_encrypted"=>'250',
+        "for_document_signer_2_year_both"=>'400',
+        
+        "for_director_kyc_1_year_signature"=>'300',
+        "for_director_kyc_1_year_encrypted"=>'400',
+        "for_director_kyc_1_year_both"=>'650',
+        "for_director_kyc_2_year_signature"=>'250',
+        "for_director_kyc_2_year_encrypted"=>'300',
+        "for_director_kyc_2_year_both"=>'450',
+    ];
+
+    //find the price 
+    if(!empty($scheme_name)){
+        return (isset($certificate[$scheme_name]))?$certificate[$scheme_name]:'0.00';
+    }
+    else{
+        return $certificate;
+    }
+}
 ?>

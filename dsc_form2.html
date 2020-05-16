@@ -193,7 +193,7 @@
 
 			     <div class="form-group">
 			      <label for="state"><b>State</b></label>
-			      <select type="text" class="form-control" id="state" name="state" required>
+			      <select type="text" class="form-control" id="state" name="state">
             <option>Andhra Pradesh</option>
             <option>Arunachal Pradesh</option>
             <option>Assam</option>
@@ -244,7 +244,7 @@
 			    		<div class="col-sm-6">
 			    			<div class="form-group">
 						      <label for="city"><b>City/Village</b></label>
-						      <input type="text" class="form-control" id="city" name="city" required>
+						      <input type="text" class="form-control" id="city" name="city">
 						      <div class="valid-feedback">Valid.</div>
 						      <div class="invalid-feedback">Please fill out this field.</div>
 						    </div>
@@ -253,7 +253,7 @@
 			    		<div class="col-sm-6">
 			    			<div class="form-group" >
 						      <label for="pincode"><b>Postal Code</b></label>
-						      <input type="text" class="form-control" id="pincode" name="pincode" required>
+						      <input type="text" class="form-control" id="pincode" name="pincode">
 						      <div class="valid-feedback">Valid.</div>
 						      <div class="invalid-feedback">Please fill out this field.</div>
 						    </div>
@@ -265,7 +265,7 @@
 
 			    <div class="form-group">
 			      <label for="country"><b>Country</b></label>
-			      <input type="text" class="form-control" id="country" name="country" value="India" required>
+			      <input type="text" class="form-control" id="country" name="country" value="India">
 			      <div class="valid-feedback">Valid.</div>
 			      <div class="invalid-feedback">Please fill out this field.</div>
 			    </div>
@@ -398,12 +398,27 @@ $(document).ready(function(){
 <script src="js/dev_mrin.js"></script>
 <script>
   //now get all the value from the brouser memory 
+  let price_per_pice="";
   let dsc_frm_key_value = getSavedData('dsc_frm_key_value');
+  console.log(dsc_frm_key_value);
   if(dsc_frm_key_value.hasOwnProperty('clt')){
     let str = dsc_frm_key_value.clt+' '+dsc_frm_key_value.ust+' '+dsc_frm_key_value.crt+' '+dsc_frm_key_value.ufor;
     str+= ' validity '+dsc_frm_key_value.vld;
+    let quantity = parseInt(dsc_frm_key_value.quantity);
+    price_per_pice = parseInt(dsc_frm_key_value.amount)*quantity;
+
     $("#dsc_summery").html(str);
-    $(".you_pay h4").html("Total Amount Rs. "+dsc_frm_key_value.amount+'/-');
+    $(".you_pay h4").html("Total Amount Rs. "+price_per_pice+'/-');
+  }
+  else if(dsc_frm_key_value.hasOwnProperty('is_category_payment') && dsc_frm_key_value.is_category_payment=='1'){
+    let str = dsc_frm_key_value.plane_name;
+    let quantity = parseInt(dsc_frm_key_value.quantity);
+    price_per_pice = parseInt(dsc_frm_key_value.payment_amount)*quantity;
+    $("#dsc_summery").html(str);
+    $(".you_pay").html("You Need To Pay Rs. "+price_per_pice+"/-");
+  }
+  else{
+    window.location='dsc.html';
   }
 </script>
 <!--end :: development-->
