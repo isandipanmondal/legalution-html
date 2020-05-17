@@ -38,47 +38,105 @@ function callback_request($data){
 // customer complaine basic details 
 function complaine_basic_info($data){
     common_print($data);
-    $subject="Basic details of customer complaine";
-    $message = "Hi,\nCustomer launch a complaine, details are as follows\n";
-    $message .="Customer Name : ".$data['name'];
-    $message .="Customer Phone : ".$data['mno'];
-    $message .="Customer Email : ".$data['Email'];
-    $message .="Customer Address : ".$data['Address'];
-    $message .="Company Name: ".$data['cacn'];
-    $message .="Complain Subject : ".$data['comsub'];
-    $message .="Complain Category : ".$data['cata'];
-    $message .="Payment : ".$data['Payment'];
-    //mail function of the server default called for send the mail with sunject 
+    //get all the param value
+    $name = isset($data['name'])?$data['name']:'';
+    $mobile_no = isset($data['mno'])?$data['mno']:'';
+    $email = isset($data['Email'])?$data['Email']:'';
+    $address = isset($data['Address'])?$data['Address']:'';
+    $pincode = isset($data['pincode'])?$data['pincode']:'';
+    $state = isset($data['state'])?$data['state']:'';
+    $cata = isset($data['cata'])?$data['cata']:'';
+
+    $subject="Customer looking for fill up a complaine.";
+    $message = "Hi,\nCustomers details are as follows\n";
+    $message .="\nCustomer Name : ".$name;
+    $message .="\nCustomer Phone : ".$mobile_no;
+    $message .="\nCustomer Email : ".$email;
+    $message .="\nCustomer Address : ".$address;
+    $message .="\nCustomer PIN : ".$pincode;
+    $message .="\nState : ".$state;
+    $message .="\nComplain Category : ".$cata;
+    //
     $headers = mail_headers();
     mail(recieverEmail,$subject,$message,$headers);
-    $msg='';
-    return_response($status=1,$msg,$data=array());
+    $msg='We connect you very soon.';
+    return_response($status=1,$msg,array());
 }
 
-// complained full details
+// complained full details and plain
 function customer_complain(){
     // receive all the get param
     $get_params = $_GET;
     $post_params = $_POST;
     $file_params = $_FILES;
-    //now get only the files 
-    $files = array_values($file_params);
+    //get all the param value
+    $name = isset($get_params['name'])?$get_params['name']:'';
+    $mobile_no = isset($get_params['mno'])?$get_params['mno']:'';
+    $email = isset($get_params['Email'])?$get_params['Email']:'';
+    $address = isset($get_params['Address'])?$get_params['Address']:'';
+    $pincode = isset($get_params['pincode'])?$get_params['pincode']:'';
+    $state = isset($get_params['state'])?$get_params['state']:'';
+    $cata = isset($get_params['cata'])?$get_params['cata']:'';
 
-    $subject="Customer send a complaine";
-    $message = "Hi,\nCustomer launch a complaine, details are as follows\n";
-    $message .="\nCustomer Name : ".$_GET['name'];
-    $message .="\nCustomer Phone : ".$_GET['mno'];
-    $message .="\nCustomer Email : ".$_GET['Email'];
-    $message .="\nCustomer Address : ".$_GET['Address'];
-    $message .="\nCompany Name: ".$_GET['cacn'];
-    $message .="\nComplain Subject : ".$_GET['comsub'];
-    $message .="\nComplain Category : ".$_GET['cata'];
-    $message .="\nComplain Details: ".$_POST['doc'];
-    $message .="\nState : ".$_POST['state'];
-    $message .="\nPayment : ".$_GET['Payment'];
-    
-    multi_attach_mail(recieverEmail,$subject,$message,$files);
-    header("Location:concom.html");
+    $company_name = isset($post_params['company_name'])?$post_params['company_name']:'';
+    $disput_amount = isset($post_params['amount'])?$post_params['amount']:0;
+    $complaint_details = isset($post_params['complaint'])?$post_params['complaint']:'';
+    $price_range = isset($post_params['price_range'])?$post_params['price_range']:0;
+
+    //get the price of the complained
+    $complain_amount = complain_prices($price_range);
+
+    if(!is_array($complain_amount) && $complain_amount>0){
+        $registration_id = "CUSCOM-".date("Y")."/".rand(9999,1000000);
+        //now get only the files 
+        //$files = array_values($file_params);
+        $subject="Customer try to payment for complain Id ".$registration_id;
+        $message = "Hi,\nCustomer fill up a complain, details are as follows\n";
+        $message .="\nCustomer Name : ".$name;
+        $message .="\nCustomer Phone : ".$mobile_no;
+        $message .="\nCustomer Email : ".$email;
+        $message .="\nCustomer Address : ".$address;
+        $message .="\nCustomer PIN : ".$pincode;
+        $message .="\nState : ".$state;
+        $message .="\nComplain Category : ".$cata;
+        $message .="\nCompany Name: ".$company_name;
+        $message .="\Disput Amount: ".$disput_amount;
+        $message .="\nComplain Details : ".$complaint_details;
+        $message .="\nComplaint ID : ".$registration_id;
+        $message .="\nComplain Amount : ".$complain_amount;
+        $headers = mail_headers();
+        mail(recieverEmail,$subject,$message,$headers);
+        
+        //multi_attach_mail(recieverEmail,$subject,$message,$files);
+
+        //validate the payment section and go to the payment PG
+        $total_payment  = $complain_amount + ceil(($complain_amount*18)/100);
+        //now make payment for this application
+        $amout=$total_payment;
+        $purpose="Complaint Id ".$registration_id;
+        $buyer_name = $name;
+        $phone = $mobile_no;
+        $pay_for=6;
+        $payment_request_url = get_payment_link($amout,$purpose,$buyer_name,$phone,$email,$pay_for);
+        header("Location:$payment_request_url");
+    }
+    else{
+        die("Error :: Invalid request");
+    }
+}
+
+function complain_prices($compainType=0){
+    $prices=[
+        '1'=>'499',
+        '2'=>'799',
+        '3'=>'1299'
+    ];
+    if(!empty($compainType)){
+        return (isset($prices[$compainType]))?$prices[$compainType]:0;
+    }
+    else{
+        return $prices;
+    }
 }
 
 function multi_attach_mail($to, $subject, $message, $files = array(),$isFormFile=true){

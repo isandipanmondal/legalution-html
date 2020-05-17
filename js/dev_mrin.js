@@ -288,25 +288,17 @@ $(document).ready(function(){
             },
             Address:{
                 //required:true,
-                maxlength:200,
+                maxlength:250,
             },
-            cacn:{
+            pincode:{
                 //required:true,
-                maxlength:100,
-            },
-            comsub:{
-                //required:true,
-                maxlength:150,
+                digits:true,
+                maxlength:6,
             },
             cata:{
                 //required:true,
-                maxlength:150,
+                maxlength:250,
             },
-            Payment:{
-                //required:true,
-                number:true,
-                maxlength:8,
-            }
         },
         errorElement:"em",
         errorClass:"text-danger",
@@ -332,22 +324,32 @@ $(document).ready(function(){
     //customer complaine form 2
     $("#complainFrm2").validate({
         rules:{
-            doc:{
-                required:true,
-                maxlength:200,
+            company_name:{
+                //required:true,
+                maxlength:250,
             },
-            state:{
-                required:true,
+            amount:{
+                digits:true,
+            },
+            complaint:{
+                maxlength:350
             }
         },
         errorElement:"em",
         errorClass:"text-danger",
         validCalss:"text-success",
         submitHandler:function(form){
-            //update the url of the form 
-            let frmaction = $(form).attr('action')+location.search+'&func=customer_complain';
-            $(form).attr('action',frmaction);
-            form.submit();
+            //validate if the price range checked 
+            if($("input[name='price_range']:checked").length > 0){
+                //update the url of the form 
+                let frmaction = $(form).attr('action')+location.search+'&func=customer_complain';
+                $(form).attr('action',frmaction);
+                form.submit();
+            }
+            else{
+                alert("Please choose your disputs amounts range.");
+            }
+            
         }
     });
 
@@ -575,8 +577,8 @@ $(document).ready(function(){
                 maxlength:100,
             },
             fname:{
-                required:true,
-                maxlength:100,
+                //required:true,
+                maxlength:200,
             },
             mno:{
                 required:true,
@@ -589,24 +591,24 @@ $(document).ready(function(){
                 email:true,
             },
             address:{
-                required:true,
-                maxlength:200,
+                //required:true,
+                maxlength:300,
             },
             states:{
-                required:true,
-                maxlength:100,
+                //required:true,
+                maxlength:150,
             },
             pin:{
-                required:true,
+                //required:true,
                 minlength:6,
                 maxlength:6,
             },
             dept_name:{
-                required:true,
+                //required:true,
                 maxlength:100,
             },
             topic:{
-                required:true,
+                //required:true,
                 maxlength:200,
             },
         },
